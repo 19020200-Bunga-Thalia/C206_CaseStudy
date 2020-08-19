@@ -7,7 +7,7 @@ public class Product {
 	  public Product(String productName ,String category, int price) {
 	    this.productName = productName;
 	    this.category = ""; 
-	    this.price = price ;
+	    this.price = price ;  
 	    
 	  }
 	  

@@ -86,7 +86,7 @@ public class C206_CaseStudy {
 		staffList.add(st);
 		System.out.println("Staff added");
 	}
-//================Delete staff=======================
+//================Delete staff=======================  
 	public static void deleteStaff(ArrayList<Staff> staffList) {
 		if(staffList.size()==0) {
 			System.out.println("There is nothing to be deleted in the list.");
