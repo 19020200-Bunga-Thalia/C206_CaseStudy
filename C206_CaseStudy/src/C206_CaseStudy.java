@@ -3,6 +3,9 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
+	private static final int Add_Product = 0;
+	private static final int View_ProductList = 0;
+	private static final int Delete_Product = 0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<Staff> staffList = new ArrayList<Staff>();
@@ -97,10 +100,36 @@ public class C206_CaseStudy {
 			}
 		}
 		String yes_no=Helper.readString("You confirm want to delete ? (Yes/No):");
+		Object option;
 		if (yes_no.equalsIgnoreCase("Yes")) {
 			staffList.remove(staffpos);
 			System.out.println("Staff has been deleted");
+// =====================PRODUCT===========================
+
+ArrayList<Product> productList;
+			// ====================== view product =========================
+			for (int i = 0; i < productList.size(); i++) {
+				Product p = productList.get(i);
+				System.out.println(String.format("%-10s %-30s %-10d", productName,category, price );
+// ======================= ADD PRODUCT========================= 
+				ArrayList<String> productList= new ArrayList<String>();
+				String productName = Helper.readString("Enter a product to add > ");
+				String category = Helper.readString("Enter category of produc > ");
+				double price = Helper.readDouble("Enter price of product > ");
+				String productA = Helper.readString(productName);
+				productList.add(productA);
+				    
+				   }
+				   
+// ================== delete product ===============================
+				    String productD= Helper.readString("Enter a product to delete > ");
+				    for(int b = 0; b < productList.size(); b++) {
+				     productList.remove(productD);
+				     System.out.println("Item has been deleted!");
+				    }
 		}
 		}
-		}
+	}
 }
+
+
