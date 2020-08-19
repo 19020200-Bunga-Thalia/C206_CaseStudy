@@ -43,8 +43,8 @@ import org.junit.Test;
 	return null;
 }
 
-@After
-public class C206_CaseStudyTest {
+
+public class C206_CaseStudyTest {  
 	private Product p1;
 	private Product p2;
 	private ArrayList<Product> staffList = new ArrayList<Product>();
@@ -75,9 +75,9 @@ public class C206_CaseStudyTest {
             
           }
           else if (option == Delete_Product) {
-            int ID = Helper.readInt("Enter product ID > ");
+            String productName = Helper.readInt("Enter product name > ");
             for (int i = 0; i < productList.size(); i++) {
-              if (ID == productList.get(i).getProductID()) {
+              if (productName == productList.get(i).getProductName()) {
                 productList.remove(i);
               }
             }
@@ -100,15 +100,15 @@ public class C206_CaseStudyTest {
         public static String retrieveProductList (ArrayList<product> productList) {
             String output = " ";
             for (int i = 0; i < productList.size(); i++) {
-              output += String.format("%d %-20s %-20s %-20d", (i+1), productList.get(i).getProductName(), productList.get(i).getCategory(), productList.get(i).getPrice());
+              output += String.format("%d %-20s %-20s %-20d \n", (i+1), productList.get(i).getProductName(), productList.get(i).getCategory(), productList.get(i).getPrice());
             }
             return output;
           }
           public static void viewProductList(ArrayList<product> productList) {
             C206_CaseStudy.setHeader("PRODUCT LisT");
-            String output = String.format("%s %-20s", "PRODUCT", "$");
+            String output = String.format("%-20ss %-20s %-20s", "PRODUCT","Category","$");
             output += retrieveProductList(productList);
-            System.out.println(output);
+            System.out.println(output); 
           }
 
   }
