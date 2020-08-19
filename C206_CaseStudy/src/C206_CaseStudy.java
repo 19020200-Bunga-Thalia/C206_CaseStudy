@@ -96,11 +96,15 @@ public class C206_CaseStudy {
 				staffpos=i;
 			}
 		}
-		String yes_no=Helper.readString("You confirm want to delete ? (Yes/No):");
-		if (yes_no.equalsIgnoreCase("Yes")) {
+		String yesNno=Helper.readString("You confirm want to delete ? (Yes/No):");
+		if (yesNno.equalsIgnoreCase("Yes")) {
 			staffList.remove(staffpos);
 			System.out.println("Staff has been deleted");
 		}
 		}
 		}
+	public static void addStaff(ArrayList<Staff> staffList, Staff worker1) {
+		// TODO Auto-generated method stub
+		
+	}
 }
