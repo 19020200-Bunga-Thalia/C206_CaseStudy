@@ -49,6 +49,8 @@ import org.junit.Test;
 //===============KARLA ==============
 
   public class C206_CaseStudyTest {
+	  
+  }
     
     private Product p1;
     private Product p2;
@@ -58,8 +60,10 @@ import org.junit.Test;
     }
 
     @Before
-    public void setUp() throws Exception {
-      t = new product("product name", "category "," price");}
+    p1 = new Product("Banana","fruits", 4);
+    p2 = new Product("Apple", "fruits", 2)
+    public void setUp1() throws Exception {
+      p = new Product("product name", "category "," price");}
       
       productList = new ArrayList<Product>();
     }
@@ -71,24 +75,45 @@ import org.junit.Test;
     }
 
     @Test
-    public void c206_test() {
+    public void add_producttest() { {
       //fail("Not yet implemented"); 
       assertTrue("C206_CaseStudy_SampleTest ",true);
       
-      //normal (After adding product name, the transaction information list will increase)
+      //ADD NORMAL
       C206_CaseStudy.addTransaction(productList, p);
       assertEquals("Test if Transaction arraylist is 1?", 1, productList.size());
+      //ADD  (BOUNDARY)
+      assertNotNull("Check if there is valid Transaction information arraylist to add to", productList);
       
-      //error (View a product that is null. System will display an error message);
-      C206_CaseStudy.viewProduct(productList);
+      //ADD (ERROR)
+      assertSame("Test that Transaction is added same as 1st item of the list?", p1, transactionList.get(0))
+      
+     //VIEW ( ERROR)
+      public void view_producttest() {
       assertNotNull("Check if the transaction list is null", productList);
       
-      //boundary (After adding a productname into the product list, product information list cannot be null and must be filled up)
-      assertNotNull("Check if there is valid Transaction information arraylist to add to", productList);
+      // VIEW BOUNDARY 
+      
+      assertNotNull("Test if there is valid Staff arraylist to retrieve item from",productList );
+ 
+      // VIEW NORMAL
+      assertEquals("Test that staff arraylist size is 2", 1, ((ArrayList<Product>) productList).size());}
+    
+    public void delete_producttest() {
+    	  //DELETE BOUNDARY
+    	      assertNotNull("Test if there is valid staff arraylist to add to", staffList);
+    	  //DELETE NORMAL
+    	      productList.add(p1);  
+    	      assertEquals("Test if that staff arraylist size is 1?", 1, productList.size());
+    	      staffList.clear();
+    	      assertEquals("Test if that staff arraylist size is 0?", 0, productList.size());
+    	  //
       
       @Before
       public void setUp1() throws Exception {
         t = new Transaction(19010017, "Valerie");
+       
+        
         
         transactionList = new ArrayList<Transaction>();
       }
