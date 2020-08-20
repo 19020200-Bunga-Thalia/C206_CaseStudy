@@ -1,5 +1,6 @@
 
 public class Customer  {
+	//BUNGA
 	private int customer_id;
 	private String customer_name;
 	private String customer_contact;

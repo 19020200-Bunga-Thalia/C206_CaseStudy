@@ -7,13 +7,16 @@ public class C206_CaseStudy {
 	private static final int Add_Product = 0;
 	private static final int View_ProductList = 0;
 	private static final int Delete_Product = 0;
+	private static final int OPTION_ARCHIVETRANSACTION = 2;
+	  private static final int OPTION_ADDTRANSACTION = 1;
+	  private static final int OPTION_VIEWALLTRANSACTION = 3;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<Staff> staffList = new ArrayList<Staff>();
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		ArrayList<Outlet> outletList = new ArrayList<Outlet>();
 		ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
-		
+		ArrayList<Transaction> archiveList = new ArrayList<Transaction>();
 		
 		staffList.add(new Staff(12, "Tom", "12122000"));
 		staffList.add(new Staff(13, "Tim", "09112000"));
@@ -54,33 +57,54 @@ public class C206_CaseStudy {
 			
 						
 			} else if (option == 3) {
+				System.out.println("1. Add");
+				System.out.println("2. Delete");
+				System.out.println("3. View All");	
+				int suboption=Helper.readInt("Enter option :");
+				if(suboption==1) {
+					C206_CaseStudy.addCustomer(customerList);
+				}else if(suboption==2) {
+					C206_CaseStudy.deleteCustomer(customerList);
+				}else if(suboption==3) {
+					C206_CaseStudy.viewAllCustomer(customerList);
+				}else {
+					System.out.println("Invalid option");
+				}
+				}
 				
 			} else if (option == 4) {
-				 option = Helper.readInt("Enter an option > ");
-				    
-			      if (option ==1) {
-			        //view all outlet
-			    	C206_CaseStudy.viewAllOutlet(outletList);    
-			      
-			      } else if (option ==2) {
-			        //add outlet
-			    	C206_CaseStudy.addAllOutlet(outletList);   
-			      
-			      } else if (option ==3) {
-			        //delete outlet
-			        C206_CaseStudy.delAllOutlet(outletList);
-			    } else {
-			        System.out.println("Invalid option");
-			    }
-	
+				System.out.println("1. Add");
+				System.out.println("2. Delete");
+				System.out.println("3. View All");	
+				int suboption=Helper.readInt("Enter option :");
+				if(suboption==1) {
+					C206_CaseStudy.addOutlet(staffList);
+				}else if(suboption==2) {
+					C206_CaseStudy.deleteOutlet(staffList);
+				}else if(suboption==3) {
+					C206_CaseStudy.viewAllOutlet(staffList);
+				}
 						
 			}else if (option == 5) {
-				System.out.println("Bye!");
-			}else {
+				System.out.println("1. Add");
+				System.out.println("2. Archive");
+				System.out.println("3. View All");	
+				int suboption=Helper.readInt("Enter option :");
+				if(suboption==1) {
+					C206_CaseStudy.addTransaction(staffList);
+				}else if(suboption==2) {
+					C206_CaseStudy.archiveTransaction(staffList);
+				}else if(suboption==3) {
+					C206_CaseStudy.viewTransaction(staffList);
+				}else {
+					System.out.println("Invalid option");
+				}
+				}else {
 				System.out.println("Invalid option");
 			}
 
 		}
+	
 
 		
 	}
@@ -173,6 +197,60 @@ ArrayList<Product> productList;
 	}
 	
 	// =====================CUSTOMER(BUNGA)===========================
+	
+	//================VIEW CUSTOMER=======================
+	
+		public static String retrieveAllCustomer(ArrayList<Customer> customerList) {
+			String output="";
+			for (int i = 0; i < customerList.size(); i++) {
+				output += String.format("%-25d %-25s %-25s \n", customerList.get(i).getCust_id(), customerList.get(i).getCust_name(),staffList.get(i).getStaff_birthdate());
+			}
+			return output;
+		}
+		public static void viewAllCustomer(ArrayList<Customer> customerList) {
+			Helper.line(80, "-");
+			System.out.println("CUSTOMER LIST");
+			Helper.line(80, "-");
+			String output = String.format("%-25s %-25s %-25s \n", "CUSTOMER ID", "CUSTOMER NAME",
+					"CONTACT NUMBER");
+			 output += retrieveAllCustomer(customerList);	
+			System.out.println(output);
+		}
+		
+		// ======================= ADD CUSTOMER========================= 
+		public static void addCustomer(ArrayList<Customer> customerList) {
+			int customer_id = Helper.readInt("Enter Customer ID : ");
+			String customer_name = Helper.readString("Enter Customer name : ");
+			String customer_contact = Helper.readString("Enter customer contact number: ");
+			Customer ct= new Customer(customer_id, customer_name, customer_contact);
+			customerList.add(ct);
+			System.out.println("Customer added");
+		}
+		
+	// ======================= DELETE CUSTOMER========================= 
+		public static void deleteCustomer(ArrayList<Customer> CustomerList) {
+			if(CustomerList.size()==0) {
+				System.out.println("There is nothing to be deleted in the list.");
+			}else {
+			C206_CaseStudy.viewAllCustomer(customerList);
+			int staff_id=Helper.readInt("Enter Staff ID that you want to remove :");
+			int staffpos=-1;
+			for (int i=0;i<staffList.size();i++) {
+				if (staff_id==staffList.get(i).getStaff_id()) {
+					staffpos=i;
+				}
+			}
+
+			String yesNno=Helper.readString("You confirm want to delete ? (Yes/No):");
+			if (yesNno.equalsIgnoreCase("Yes")) {
+
+			String yes_no=Helper.readString("You confirm want to delete ? (Yes/No):");
+			Object option;
+			if (yes_no.equalsIgnoreCase("Yes")) {
+
+				staffList.remove(staffpos);
+				System.out.println("Staff has been deleted");
+		
 	// =====================OUTLETS(GRACE)===========================
 	// =====================TRANSACTION(VALERIE)===========================
 }
