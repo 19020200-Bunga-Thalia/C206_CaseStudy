@@ -109,42 +109,84 @@ import org.junit.Test;
     	      assertEquals("Test if that staff arraylist size is 0?", 0, productList.size());
     	  //
       
-      @Before
-      public void setUp1() throws Exception {
-        t = new Transaction(19010017, "Valerie");
-       
-        
-        
-        transactionList = new ArrayList<Transaction>();
-      }
+    	      public class C206_CaseStudyTest {
+    	    	  
+    	    	  private Transaction t;
+    	    	  private ArrayList <Transaction> transactionList;
+    	    	  public C206_CaseStudyTest() {
+    	    	    super();
+    	    	  }
 
-      @After
-      public void tearDown1() throws Exception {
-        t = null;
-        transactionList = null;
-      }
-      
-      
-      //============VALERIE=========
+    	    	  @Before
+    	    	  public void setUp() throws Exception {
+    	    	    t = new Transaction(19010017, "Valerie");
+    	    	    
+    	    	    transactionList = new ArrayList<Transaction>();
+    	    	  }
 
-      @Test
-      public void c206_test() {
-        //fail("Not yet implemented"); 
-        assertTrue("C206_CaseStudy_SampleTest ",true);
-        
-        //normal (After adding transaction information, the transaction information list will increase)
-        C206_CaseStudy.addTransaction(transactionList, t);
-        assertEquals("Test if Transaction arraylist is 1?", 1, ((ArrayList<Transaction>) transactionList).size());
-        
-        //error (View a transaction that is null. System will display an error message);
-        C206_CaseStudy.viewTransaction(transactionList);
-        assertNotNull("Check if the transaction list is null", transactionList);
-        
-        //boundary (After adding a transaction information into the transaction list, transaction information list cannot be null and must be filled up)
-        assertNotNull("Check if there is valid Transaction information arraylist to add to", transactionList)      
-    }
+    	    	  @After
+    	    	  public void tearDown() throws Exception {
+    	    	    t = null;
+    	    	    transactionList = null;
+    	    	  }
 
-  }
-//
+    	    	  @Test
+    	    	  public void c206_test() {
+    	    	    //fail("Not yet implemented"); 
+    	    	    assertTrue("C206_CaseStudy_SampleTest ",true);
+    	    	    
+    	    	  }
+    	    	  
+    	    	  @Test
+    	    	  public void addTransactionInfoTest() {
+    	    	    //==========Add Transaction==========
+    	    	    //normal (After adding transaction information, the transaction information list will increase);
+    	    	    C206_CaseStudy.addTransaction(transactionList, t);
+    	    	    assertEquals("Test if Transaction arraylist is 1?", 1, transactionList.size());
+    	    	  
+    	    	    //error (if a duplicated transaction is added, display an error);
+    	    	    C206_CaseStudy.addTransaction(transactionList, t);
+    	    	    assertEquals("Test if a duplicated transaction is added?", 0, transactionList);
+    	    	  
+    	    	    //boundary (After adding a transaction information into the transaction list, transaction information list cannot be null and must be filled up);
+    	    	    assertNotNull("Test if there is valid Transaction information arraylist to add to", transactionList);
+    	    	    
+    	    	  }
+    	    	  
+    	    	  @Test
+    	    	  public void viewTransactionInfoTest() {
+    	    	    //==========View Transaction==========
+    	    	    //normal (View a transaction from the transaction list);
+    	    	    C206_CaseStudy.viewTransaction(transactionList);
+    	    	    assertNotEquals("Test if it a transaction from the transaction list is viewable", 0, transactionList);
+    	    	    
+    	    	    //error (View a transaction that is null. System will display an error message);
+    	    	    C206_CaseStudy.viewTransaction(transactionList);
+    	    	    assertNotNull("Test if the transaction list is null", transactionList);
+    	    	    
+    	    	    //boundary (View two transactions at once. System crashes as it can only be viewed one at a time);
+    	    	    C206_CaseStudy.viewTransaction(transactionList);
+    	    	    assertEquals("Test if two transactions can be viewed at once", 2, 1);
+    	    	    
+    	    	  }
+    	    	  
+    	    	  @Test
+    	    	  public void deleteTransactionInfoTest() {
+    	    	    ArrayList<Transaction> archiveList = null;
+    	    	    //==========Archive Transaction==========
+    	    	    //normal (After archiving an old transaction, transaction list size will reduce);
+    	    	    C206_CaseStudy.archiveTransaction(transactionList, archiveList);
+    	    	    assertEquals("Test if transaction arraylist is 0", 0, transactionList.size());
+    	    	  
+    	    	    //error (After archiving an old transaction, transaction list should not consist the old transaction again);
+    	    	    C206_CaseStudy.archiveTransaction(transactionList, archiveList);
+    	    	    assertEquals("Test if transaction arraylist still consists the old transaction", 0, transactionList);
+    	    	  
+    	    	    //boundary (Transaction list cannot be null before archiving an old transaction);
+    	    	    assertNotNull("Test if an old transaction can be archived despite transaction list being null", transactionList);
+    	    	    
+    	    	  }
+    	    	  
 
-}
+
+    	    	} //end of C206_CaseStudyTest
