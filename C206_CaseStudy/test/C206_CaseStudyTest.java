@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.util.AbstractCollection;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -10,6 +11,8 @@ import org.junit.Test;
 		private Staff worker1;
 		private Staff worker2;
 		private ArrayList<Staff> staffList = new ArrayList<Staff>();
+		private Object productList;
+		private Object transactionList;
 		
 		public C206_CaseStudyTest() {
 			super();
@@ -43,73 +46,78 @@ import org.junit.Test;
 	return null;
 }
 
+//===============KARLA ==============
 
-public class C206_CaseStudyTest {  
-	private Product p1;
-	private Product p2;
-	private ArrayList<Product> staffList = new ArrayList<Product>();
-	
-	public C206_CaseStudyTest() {
-		super();}
-		  public void setUp() throws Exception {
-				p1 = new Product("Banana","fruits", 4);
-				p2 = new Product("Apple", "fruits", 2);
-				
-				productList= new ArrayList<product>();}
-		
-  public void tearDown() throws Exception {
-		worker1 = null;
-		worker2 = null;
-		option = 0;
-        while (option != 5) {
-          C206_CaseStudy.productMenu();
-          option = Helper.readInt("Enter an option > ");
-          if (option == Add_Product) {
-            String ProductName= Helper.readInt("Enter new product name > ");
-            String category = Helper.readString("Enter category> ");
-           int price = Helper.readInt("Enter price > ");
-            productList.add(new product(ProductName, category, price));
-          }
-          else if (option == View_ProductList) {
-            C206_CaseStudy.viewProductList(productList);
-            
-          }
-          else if (option == Delete_Product) {
-            String productName = Helper.readInt("Enter product name > ");
-            for (int i = 0; i < productList.size(); i++) {
-              if (productName == productList.get(i).getProductName()) {
-                productList.remove(i);
-              }
-            }
-          }
-          else if (option == Exit_Product) {
-            System.out.println("Bye!");
-          }
-          else {
-            System.out.println("Invalid Option.");
-          }
-        }
-        public static void productMenu() {
-            C206_CaseStudy.setHeader("Product List");
-            System.out.println("1. Add Product");
-            System.out.println("2. View Product");
-            System.out.println("3. Delete Product");
-            System.out.println("4. Quit");
-            Helper.line(80, "-");
-          }
-        public static String retrieveProductList (ArrayList<product> productList) {
-            String output = " ";
-            for (int i = 0; i < productList.size(); i++) {
-              output += String.format("%d %-20s %-20s %-20d \n", (i+1), productList.get(i).getProductName(), productList.get(i).getCategory(), productList.get(i).getPrice());
-            }
-            return output;
-          }
-          public static void viewProductList(ArrayList<product> productList) {
-            C206_CaseStudy.setHeader("PRODUCT LisT");
-            String output = String.format("%-20ss %-20s %-20s", "PRODUCT","Category","$");
-            output += retrieveProductList(productList);
-            System.out.println(output); 
-          }
+  public class C206_CaseStudyTest {
+    
+    private Product p1;
+    private Product p2;
+    private ArrayList <Product> productList;
+    public C206_CaseStudyTest() {
+      super();
+    }
+
+    @Before
+    public void setUp() throws Exception {
+      t = new product("product name", "category "," price");}
+      
+      productList = new ArrayList<Product>();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+      t = null;
+      productList = null;
+    }
+
+    @Test
+    public void c206_test() {
+      //fail("Not yet implemented"); 
+      assertTrue("C206_CaseStudy_SampleTest ",true);
+      
+      //normal (After adding product name, the transaction information list will increase)
+      C206_CaseStudy.addTransaction(productList, p);
+      assertEquals("Test if Transaction arraylist is 1?", 1, productList.size());
+      
+      //error (View a product that is null. System will display an error message);
+      C206_CaseStudy.viewProduct(productList);
+      assertNotNull("Check if the transaction list is null", productList);
+      
+      //boundary (After adding a productname into the product list, product information list cannot be null and must be filled up)
+      assertNotNull("Check if there is valid Transaction information arraylist to add to", productList);
+      
+      @Before
+      public void setUp1() throws Exception {
+        t = new Transaction(19010017, "Valerie");
+        
+        transactionList = new ArrayList<Transaction>();
+      }
+
+      @After
+      public void tearDown1() throws Exception {
+        t = null;
+        transactionList = null;
+      }
+      
+      
+      //============VALERIE=========
+
+      @Test
+      public void c206_test() {
+        //fail("Not yet implemented"); 
+        assertTrue("C206_CaseStudy_SampleTest ",true);
+        
+        //normal (After adding transaction information, the transaction information list will increase)
+        C206_CaseStudy.addTransaction(transactionList, t);
+        assertEquals("Test if Transaction arraylist is 1?", 1, ((ArrayList<Transaction>) transactionList).size());
+        
+        //error (View a transaction that is null. System will display an error message);
+        C206_CaseStudy.viewTransaction(transactionList);
+        assertNotNull("Check if the transaction list is null", transactionList);
+        
+        //boundary (After adding a transaction information into the transaction list, transaction information list cannot be null and must be filled up)
+        assertNotNull("Check if there is valid Transaction information arraylist to add to", transactionList)      
+    }
 
   }
 //
