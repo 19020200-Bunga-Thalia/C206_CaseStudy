@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 public class C206_CaseStudy {
 
-	private static final int Add_Product = 0;
-	private static final int View_ProductList = 0;
-	private static final int Delete_Product = 0;
+	private static final int Add_Product = 1;
+	private static final int View_ProductList = 3;
+	private static final int Delete_Product = 2;
 	private static final int OPTION_ARCHIVETRANSACTION = 2;
 	private static final int OPTION_ADDTRANSACTION = 1;
 	private static final int OPTION_VIEWALLTRANSACTION = 3;
@@ -59,14 +59,14 @@ public class C206_CaseStudy {
 			        System.out.println("2. Delete");
 			        System.out.println("3. View All");  
 			        int suboption = Helper.readInt("Enter option: ");
-			        if (suboption==1) {
+			        if (suboption==Add_Product) {
 			          Product p = inputProduct();
 			          C206_CaseStudy.addProduct(productList, p);
 			        }
-			        else if (suboption==2) {
+			        else if (suboption==Delete_Product) {
 			          C206_CaseStudy.viewProductList(productList);
 			        }
-			        else if (suboption==3) {
+			        else if (suboption==View_ProductList) {
 			          C206_CaseStudy.deleteProduct(productList);
 			        }
 			        else {
@@ -268,16 +268,24 @@ public class C206_CaseStudy {
 	// ======================= ADD CUSTOMER=========================
 	public static void addCustomer(ArrayList<Customer> customerList) {
 		int customer_id = Helper.readInt("Enter Customer ID : ");
-		String customer_name = Helper.readString("Enter Customer name : ");
-		int customer_contact = Helper.readInt("Enter customer contact number: ");
-		String phone = Integer.toString(customer_contact);
-		if (phone.length() < 8 || phone.length() > 8) {
-			System.out.println("Invalid phone number");
+		for(int i=0;i<customerList.size();i++) {
+			if(customer_id == customerList.get(i).getCust_id()) {
+				System.out.println("Customer ID is taken");
+			}else {
+				String customer_name = Helper.readString("Enter Customer name : ");
+				int customer_contact = Helper.readInt("Enter customer contact number: ");
+				String phone = Integer.toString(customer_contact);
+				if (phone.length() < 8 || phone.length() > 8) {
+					System.out.println("Invlaid phone number");
+				} else {
+					Customer ct = new Customer( customer_id, customer_name, customer_contact);
+					customerList.add(ct);
+					System.out.println("Customer added");
+				}
+			}
 		}
-		Customer ct = new Customer(customer_id, customer_name, customer_contact);
-		customerList.add(ct);
-		System.out.println("Customer added");
 	}
+
 
 	// ======================= DELETE CUSTOMER=========================
 	public static void deleteCustomer(ArrayList<Customer> customerList) {
