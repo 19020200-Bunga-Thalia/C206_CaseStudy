@@ -10,11 +10,17 @@ import org.junit.Test;
 	public class C206_CaseStudyTest {
 		private Staff worker1;
 		private Staff worker2;
-		private ArrayList<Staff> staffList = new ArrayList<Staff>();
-		private Object productList;
-		private Object transactionList;
+	 ArrayList<Staff> staffList;
 		
-		public C206_CaseStudyTest() {
+		private Product p1;
+	    private Product p2;
+	    ArrayList <Product> productList;
+	    
+	    private Customer c1;
+	    private Customer c2;
+	    ArrayList <Customer>
+		
+  public C206_CaseStudyTest() {
 			super();
 		}
 
@@ -46,69 +52,68 @@ import org.junit.Test;
 	return null;
 }
 
+
 //===============KARLA ==============
 
-  public class C206_CaseStudyTest {
-	  
-  }
+
     
-    private Product p1;
-    private Product p2;
-    private ArrayList <Product> productList;
-    public C206_CaseStudyTest() {
-      super();
-    }
+    
 
     @Before
-    p1 = new Product("Banana","fruits", 4);
-    p2 = new Product("Apple", "fruits", 2)
-    public void setUp1() throws Exception {
-      p = new roduct("product name", "category "," price");}
+    public void setUp11() throws Exception {
+    	 //insert test data
+    	p1 = new Product("Banana","fruits", 4);
+    	  p2 = new Product("Apple", "fruits", 2);
+    	  productList = new ArrayList<Product>();
       
-      productList = new ArrayList<Product>();
+      
     }
 
     @After
     public void tearDown() throws Exception {
-      t = null;
-      productList = null;
     }
 
     @Test
-    public void add_producttest() { {
-      //fail("Not yet implemented"); 
-      assertTrue("C206_CaseStudy_SampleTest ",true);
+    public void add_producttest() {
+      
+     
       
       //ADD NORMAL
-      C206_CaseStudy.addTransaction(productList, p);
-      assertEquals("Test if Transaction arraylist is 1?", 1, productList.size());
+      C206_CaseStudy.addProduct(productList, p1);
+      assertEquals("Test if product arraylist is 1?", 1, productList.size());
       //ADD  (BOUNDARY)
-      assertNotNull("Check if there is valid Transaction information arraylist to add to", productList);
+      assertNotNull("Check if there is any item inside the product arraylist ", productList);
       
-      //ADD (ERROR)
-      assertSame("Test that Transaction is added same as 1st item of the list?", p1, transactionList.get(0))
+     //ADD (ERROR)
+     assertSame("Test that the product is added same as 1st item of the list?", p1, productList.get(0));
+    }
       
      //VIEW ( ERROR)
       public void view_producttest() {
-      assertNotNull("Check if the transaction list is null", productList);
+      assertNotNull("Check if the product list is null", productList);
       
-      // VIEW BOUNDARY 
-      
-      assertNotNull("Test if there is valid Staff arraylist to retrieve item from",productList );
+      //VIEW - boundary
+
+
+      String allProduct = C206_CaseStudy.retrieveProductList(productList);
+      String testoutput = "";
+      assertEquals("Check that ViewAllproductList", testoutput, allProduct);
  
       // VIEW NORMAL
-      assertEquals("Test that staff arraylist size is 2", 1, ((ArrayList<Product>) productList).size());}
+      assertEquals("Test that product arraylist size is 2", 2, productList.size());
+      }
     
     public void delete_producttest() {
-    	  //DELETE BOUNDARY
-    	      assertNotNull("Test if there is valid staff arraylist to add to", staffList);
-    	  //DELETE NORMAL
-    	      productList.add(p1);  
-    	      assertEquals("Test if that staff arraylist size is 1?", 1, productList.size());
-    	      staffList.clear();
-    	      assertEquals("Test if that staff arraylist size is 0?", 0, productList.size());
-    	  //
-      
+        //DELETE BOUNDARY
+            assertNotNull("Test if there is valid product to delete", productList);
+        //DELETE NORMAL
+             productList.add(p1);  
+            assertEquals("Test if that product arraylist size is 1?", 1, ( productList).size());
+            productList.clear();
+            assertEquals("Test if that product arraylist size is 0?", 0, productList.size());
+          //DELETE ERROR 
+            assertNotNull("Test if a product has been deleted despite product list being null", productList);
+            }
       @Before
       public void setUp1() throws Exception {
         t = new Transaction(19010017, "Valerie");
