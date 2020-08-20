@@ -2,12 +2,12 @@
 public class Customer  {
 	private int customer_id;
 	private String customer_name;
-	private String phone_no;
+	private String customer_contact;
 	
-	public Customer(int customer_id, String customer_name, String phone_no) {
+	public Customer(int customer_id, String customer_name, String customer_contact) {
 		this.customer_id = customer_id;
 		this.customer_name = customer_name;
-		this.phone_no = phone_no;
+		this.customer_contact=customer_contact;
 	}
 	
 public String display() {
@@ -26,7 +26,7 @@ public String display() {
 	}
 	
 	public String getCust_phone() {
-		return phone_no;
+		return customer_contact;
 	}
 	
 	public void deleteCust() {

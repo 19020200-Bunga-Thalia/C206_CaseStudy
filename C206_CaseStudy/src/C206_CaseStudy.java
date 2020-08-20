@@ -192,8 +192,8 @@ ArrayList<Product> productList;
 	public static void addCust(ArrayList<Customer> customerList) {
 		int customer_id = Helper.readInt("Enter Customer ID : ");
 		String customer_name = Helper.readString("Enter Customer name : ");
-		String phone_no= Helper.readString("Enter contact number : ");
-		Customer ct = new Customer(customer_id, customer_name, phone_no);
+		String customer_contact= Helper.readString("Enter contact number : ");
+		Customer ct = new Customer(customer_id, customer_name, customer_contact);
 		customerList.add(ct);
 		System.out.println("Customer added");
 	}
@@ -221,6 +221,7 @@ ArrayList<Product> productList;
 			customerList.remove(deleteCust());
 			System.out.println("Customer has been deleted");
 	}
-}
+
+		}
 
 
