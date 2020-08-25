@@ -270,18 +270,13 @@ public class C206_CaseStudy {
 			}
 		}
 	}
-	public static void viewHigestVendor(ArrayList<Product> productList) {
-		C206_CaseStudy.addReturnVendor(productList);
-		int points = 0;
-		for (int i = 0; i<productList.size(); i++) {
-			if (points <= productList.get(i).getPoints()) {
-				points = productList.get(i).getPoints();
-				break;
-			}
-			
-		}
-		
-	}
+	public static void viewHighestVendor(ArrayList<Product> productList) {
+	      C206_CaseStudy.addReturnVendor(productList);
+	      int highestpoints = 0;
+	      for (int i = 0; i<productList.size(); i++) {
+	        if (highestpoints < productList.get(i).getPoints()) {
+	          highestpoints = productList.get(i).getPoints();
+	          System.out.println(highestpoints.getPoints());
 //=======================Search for vendor================================
 	public static void findVendor(ArrayList<Product> productList) {
 		String v = Helper.readString("Enter the vendor you want to find > ");
