@@ -25,7 +25,7 @@ public class C206_CaseStudy {
 		staffList.add(new Staff(12, "Tom", "12122000"));
 		staffList.add(new Staff(13, "Tim", "09112000"));
 		customerList.add(new Customer(1, "Lisa", 88294751));
-		customerList.add(new Customer(2, "Chad", 95667208));
+	    customerList.add(new Customer(2, "Chad", 95667208));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
 
@@ -76,7 +76,7 @@ public class C206_CaseStudy {
 			        else if (suboption == 4) {
 			        	C206_CaseStudy.findVendor(productList);
 			        }
-			        else if (suboption ==5 ) {
+			        else if (suboption == 5) {
 			        	C206_CaseStudy.viewHigestVendor(productList);
 			        }
 			        else {
@@ -135,8 +135,11 @@ public class C206_CaseStudy {
 
 				}
 
-			} else {
-				System.out.println("Invalid option");
+			} else if (option == 6) {
+				System.out.println("Program Exit");
+			}
+			else {
+				System.out.println("Invalid Option");
 			}
 		}
 
