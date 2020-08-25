@@ -13,12 +13,6 @@ public class Customer {
 		this.customer_returns = customer_returns;
 	}
 
-	public String display() {
-
-		// Write your codes here
-		return String.format("%-10s %-30s %-10s %-10s %-20d\n", getCust_id(), getCust_name(), getCust_phone(),
-				getCust_returns());
-	}
 	
 	public void setCust_id(int customer_id) {
 		this.customer_id = customer_id;

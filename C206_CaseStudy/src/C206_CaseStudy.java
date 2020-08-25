@@ -2,6 +2,8 @@ import java.util.ArrayList;
 //
 //
 
+
+
 public class C206_CaseStudy {
 
 	private static final int Add_Product = 1;
@@ -10,7 +12,6 @@ public class C206_CaseStudy {
 	private static final int OPTION_ARCHIVETRANSACTION = 2;
 	private static final int OPTION_ADDTRANSACTION = 1;
 	private static final int OPTION_VIEWALLTRANSACTION = 3;
-	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -20,12 +21,11 @@ public class C206_CaseStudy {
 		ArrayList<Outlet> outletList = new ArrayList<Outlet>();
 		ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
 		ArrayList<Transaction> archiveList = new ArrayList<Transaction>();
-		
 
 		staffList.add(new Staff(12, "Tom", "12122000"));
 		staffList.add(new Staff(13, "Tim", "09112000"));
 		customerList.add(new Customer(1, "Lisa", 88294751, 1));
-	    customerList.add(new Customer(2, "Chad", 95667208, 2));
+		customerList.add(new Customer(2, "Chad", 95667208, 2));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
 
@@ -57,46 +57,43 @@ public class C206_CaseStudy {
 					System.out.println("Invalid option");
 				}
 			} else if (option == 2) {
-				 System.out.println("1. Add");
-			        System.out.println("2. Delete");
-			        System.out.println("3. View All");  
-			        System.out.println("4. Search Vendor");
-			        System.out.println("5. View highest return vendor");
-			        System.out.println("6. Return");
-			        int suboption = Helper.readInt("Enter option: ");
-			        if (suboption==Add_Product) {
-			          Product p = inputProduct();
-			          C206_CaseStudy.addProduct(productList, p);
-			        }
-			        else if (suboption==Delete_Product) {
-			          C206_CaseStudy.deleteProduct(productList);
-			        }
-			        else if (suboption==View_ProductList) {
-			        	C206_CaseStudy.viewProductList(productList);
-			        }
-			        else if (suboption == 4) {
-			        	C206_CaseStudy.findVendor(productList);
-			        }
-			        else if (suboption == 5) {
-			        	C206_CaseStudy.viewHighestVendor(productList);
-			        }
-			        else if (suboption == 6) {
-			        	C206_CaseStudy.addReturnVendor(productList);
-			        }
-			        else {
-			          System.out.println("Invalid Option");
-			        }
-
-			} else if (option == 3) {
 				System.out.println("1. Add");
 				System.out.println("2. Delete");
 				System.out.println("3. View All");
+				System.out.println("4. Search Vendor");
+				System.out.println("5. View highest return vendor");
+				System.out.println("6. Return");
+				int suboption = Helper.readInt("Enter option: ");
+				if (suboption == Add_Product) {
+					Product p = inputProduct();
+					C206_CaseStudy.addProduct(productList, p);
+				} else if (suboption == Delete_Product) {
+					C206_CaseStudy.deleteProduct(productList);
+				} else if (suboption == View_ProductList) {
+					C206_CaseStudy.viewProductList(productList);
+				} else if (suboption == 4) {
+					C206_CaseStudy.findVendor(productList);
+				} else if (suboption == 5) {
+					C206_CaseStudy.viewHighestVendor(productList);
+				} else if (suboption == 6) {
+					C206_CaseStudy.addReturnVendor(productList);
+				} else {
+					System.out.println("Invalid Option");
+				}
+
+			} else if (option == 3) {
+				System.out.println("1. Add New Customer");
+				System.out.println("2. Delete Customer");
+				System.out.println("3. Update Customer Return History");
+				System.out.println("4. View All Customers");
 				int suboption = Helper.readInt("Enter option :");
 				if (suboption == 1) {
 					C206_CaseStudy.addCustomer(customerList);
 				} else if (suboption == 2) {
 					C206_CaseStudy.deleteCustomer(customerList);
 				} else if (suboption == 3) {
+					C206_CaseStudy.updateCustomer(customerList);
+				} else if (suboption == 4) {
 					C206_CaseStudy.viewAllCustomer(customerList);
 				} else {
 					System.out.println("Invalid option");
@@ -141,8 +138,7 @@ public class C206_CaseStudy {
 
 			} else if (option == 6) {
 				System.out.println("Program Exit");
-			}
-			else {
+			} else {
 				System.out.println("Invalid Option");
 			}
 		}
@@ -223,7 +219,7 @@ public class C206_CaseStudy {
 	}
 
 	public static void viewProductList(ArrayList<Product> productList) {
-		String output = String.format("%-20s %-20s %-20s %-20s\n", "Product Name", "Category", "Price","Vendor");
+		String output = String.format("%-20s %-20s %-20s %-20s\n", "Product Name", "Category", "Price", "Vendor");
 		output += C206_CaseStudy.retrieveProductList(productList);
 		System.out.println(output);
 	}
@@ -260,47 +256,51 @@ public class C206_CaseStudy {
 		}
 		return productpos;
 	}
+
 //=======================Return product with top vendor return========================
 	public static void addReturnVendor(ArrayList<Product> productList) {
-	
+
 		String returnProduct = Helper.readString("Enter product to return > ");
 		String returnVendor = Helper.readString("Enter vendor to return > ");
 		int pos = 0;
-		for (int i = 0; i < productList.size(); i++ ) {
-			if ((returnProduct.equalsIgnoreCase(productList.get(i).getProductName()) && (returnVendor.equalsIgnoreCase(productList.get(i).getVendor())))) {
-				productList.get(i).setPoints(productList.get(i).getPoints()+1);
+		for (int i = 0; i < productList.size(); i++) {
+			if ((returnProduct.equalsIgnoreCase(productList.get(i).getProductName())
+					&& (returnVendor.equalsIgnoreCase(productList.get(i).getVendor())))) {
+				productList.get(i).setPoints(productList.get(i).getPoints() + 1);
 				pos = 1;
 				break;
 			}
 		}
 		if (pos == 1) {
 			System.out.println("Successful return");
-		}
-		else {
+		} else {
 			System.out.println("Invalid Product/Vendor");
 		}
 	}
+
 	public static void viewHighestVendor(ArrayList<Product> productList) {
-	      
-	      int highestpoints = 0;
-	      String vendorName = "";
-	      for (int i = 0; i<productList.size(); i++) {
-	        if (highestpoints < productList.get(i).getPoints()) {
-	          highestpoints = productList.get(i).getPoints();
-	          vendorName = productList.get(i).getVendor();
-	        }
-	    }System.out.println("Highest vendor is "+ vendorName);
-	 }
-	      
+
+		int highestpoints = 0;
+		String vendorName = "";
+		for (int i = 0; i < productList.size(); i++) {
+			if (highestpoints < productList.get(i).getPoints()) {
+				highestpoints = productList.get(i).getPoints();
+				vendorName = productList.get(i).getVendor();
+			}
+		}
+		System.out.println("Highest vendor is " + vendorName);
+	}
+
 //=======================Search for vendor================================
 	public static void findVendor(ArrayList<Product> productList) {
 		String v = Helper.readString("Enter the vendor you want to find > ");
-		String output = String.format("%-20s %-20s %-20s %-20s\n", "Product Name", "Category", "Price","Vendor");
-		for (int i = 0; i < productList.size(); i++ ) {
+		String output = String.format("%-20s %-20s %-20s %-20s\n", "Product Name", "Category", "Price", "Vendor");
+		for (int i = 0; i < productList.size(); i++) {
 			if (v.equalsIgnoreCase(productList.get(i).getVendor())) {
-				output += String.format("%-20s %-20s $%-20.2f %-20s \n", productList.get(i).getProductName(),productList.get(i).getCategory(), productList.get(i).getprice(), productList.get(i).getVendor());
-			}
-			else {
+				output += String.format("%-20s %-20s $%-20.2f %-20s \n", productList.get(i).getProductName(),
+						productList.get(i).getCategory(), productList.get(i).getprice(),
+						productList.get(i).getVendor());
+			} else {
 				System.out.println("There are no such vendor");
 			}
 			System.out.println(output);
@@ -314,8 +314,9 @@ public class C206_CaseStudy {
 	public static String retrieveAllCustomer(ArrayList<Customer> customerList) {
 		String output = "";
 		for (int i = 0; i < customerList.size(); i++) {
-			output += String.format("%-25d %-25s %-25s \n", customerList.get(i).getCust_id(),
-					customerList.get(i).getCust_name(), customerList.get(i).getCust_phone());
+			output += String.format("%-25d %-25s %-25d %-25d \n", customerList.get(i).getCust_id(),
+					customerList.get(i).getCust_name(), customerList.get(i).getCust_phone(),
+					customerList.get(i).getCust_returns());
 		}
 		return output;
 	}
@@ -324,32 +325,37 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 		System.out.println("CUSTOMER LIST");
 		Helper.line(80, "-");
-		String output = String.format("%-25s %-25s %-25s \n", "CUSTOMER ID", "CUSTOMER NAME", "CONTACT NUMBER");
+		String output = String.format("%-25s %-25s %-25s %-25s \n", "CUSTOMER ID", "CUSTOMER NAME", "CONTACT NUMBER",
+				"NO. OF RETURNS");
 		output += retrieveAllCustomer(customerList);
 		System.out.println(output);
 	}
 
 	// ======================= ADD CUSTOMER=========================
 	public static void addCustomer(ArrayList<Customer> customerList) {
-		int customer_id = Helper.readInt("Enter Customer ID : ");
-		for(int i=0;i<customerList.size();i++) {
-			if(customer_id == customerList.get(i).getCust_id()) {
-				System.out.println("Customer ID is taken");
-			}else {
-				String customer_name = Helper.readString("Enter Customer name : ");
-				int customer_contact = Helper.readInt("Enter customer contact number: ");
-				String phone = Integer.toString(customer_contact);
-				if (phone.length() < 8 || phone.length() > 8) {
-					System.out.println("Invlaid phone number");
-				} else {
-					Customer ct = new Customer( customer_id, customer_name, customer_contact);
-					customerList.add(ct);
-					System.out.println("Customer added");
-				}
+		int customer_id = 0;
+		for (int i = 0; i < customerList.size(); i++) {
+			if (customer_id <= customerList.get(i).getCust_id()) {
+				customer_id = customerList.get(i).getCust_id();
+				customer_id++;
 			}
 		}
-	}
+		String customer_name = Helper.readString("Enter Customer name : ");
+		int customer_contact = Helper.readInt("Enter customer contact number: ");
+		String phone = Integer.toString(customer_contact);
+		while (phone.length() < 8 || phone.length() > 8) {
+			System.out.println("Please enter a valid phone number");
+			customer_contact = Helper.readInt("Enter customer contact number: ");
+			phone = Integer.toString(customer_contact);
+			if (phone.length() == 8) {
+				int customer_returns = Helper.readInt("Enter number of returns made: ");
+				Customer ct = new Customer(customer_id, customer_name, customer_contact, customer_returns);
+				customerList.add(ct);
+				System.out.println("Customer added");
+			}
+		}
 
+	}
 
 	// ======================= DELETE CUSTOMER=========================
 	public static void deleteCustomer(ArrayList<Customer> customerList) {
@@ -366,6 +372,18 @@ public class C206_CaseStudy {
 					}
 					System.out.println(" Customer has been deleted");
 				}
+			}
+		}
+	}
+
+	// ================ UPDATE CUSTOMER RETURN HISTORY =======================
+	public static void updateCustomer(ArrayList<Customer> customerList) {
+		int customer_id = Helper.readInt("Enter Customer ID: ");
+		for (int i = 0; i < customerList.size(); i++) {
+			if (customer_id == customerList.get(i).getCust_id()) {
+				int updated_returns = Helper.readInt("Enter updated number of returns: ");
+				customerList.get(i).getCust_returns();
+
 			}
 		}
 	}
