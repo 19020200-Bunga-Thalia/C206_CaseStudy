@@ -4,16 +4,15 @@ public class Product {
 		  private String productName;
 		  private String category;
 		  private double price;
+		  private String vendor;
+		  private int points;
 		  
-		  public Product(String productName ,String category, double price) {
+		  public Product(String productName ,String category, double price, String vendor) {
 		    this.productName = productName;
-		    this.category = ""; 
+		    this.category = category; 
 		    this.price = price ;
+		    this.vendor = vendor;
 		    
-		  }
-		  
-		  public String toString() {
-		    return String.format("%-10s %-30s %-10d", productName,category, price );
 		  }
 		  
 		  
@@ -37,6 +36,24 @@ public class Product {
 		  public void setPrice(double price) {
 			  this.price = price;
 		  }
+
+		public String getVendor() {
+			return vendor;
+		}
+
+		public void setVendor(String vendor) {
+			this.vendor = vendor;
+		}
+
+
+		public int getPoints() {
+			return points;
+		}
+
+
+		public void setPoints(int points) {
+			this.points = points;
+		}
 		 
 		  }
 
