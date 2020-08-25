@@ -24,8 +24,8 @@ public class C206_CaseStudy {
 
 		staffList.add(new Staff(12, "Tom", "12122000"));
 		staffList.add(new Staff(13, "Tim", "09112000"));
-		customerList.add(new Customer(1, "Lisa", 88294751));
-	    customerList.add(new Customer(2, "Chad", 95667208));
+		customerList.add(new Customer(1, "Lisa", 88294751, 1));
+	    customerList.add(new Customer(2, "Chad", 95667208, 2));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
 
@@ -62,6 +62,7 @@ public class C206_CaseStudy {
 			        System.out.println("3. View All");  
 			        System.out.println("4. Search Vendor");
 			        System.out.println("5. View highest return vendor");
+			        System.out.println("6. Return");
 			        int suboption = Helper.readInt("Enter option: ");
 			        if (suboption==Add_Product) {
 			          Product p = inputProduct();
@@ -77,7 +78,10 @@ public class C206_CaseStudy {
 			        	C206_CaseStudy.findVendor(productList);
 			        }
 			        else if (suboption == 5) {
-			        	C206_CaseStudy.viewHigestVendor(productList);
+			        	C206_CaseStudy.viewHighestVendor(productList);
+			        }
+			        else if (suboption == 6) {
+			        	C206_CaseStudy.addReturnVendor(productList);
 			        }
 			        else {
 			          System.out.println("Invalid Option");
@@ -261,23 +265,32 @@ public class C206_CaseStudy {
 	
 		String returnProduct = Helper.readString("Enter product to return > ");
 		String returnVendor = Helper.readString("Enter vendor to return > ");
+		int pos = 0;
 		for (int i = 0; i < productList.size(); i++ ) {
 			if ((returnProduct.equalsIgnoreCase(productList.get(i).getProductName()) && (returnVendor.equalsIgnoreCase(productList.get(i).getVendor())))) {
 				productList.get(i).setPoints(productList.get(i).getPoints()+1);
+				pos = 1;
+				break;
 			}
-			else {
-				System.out.println("Can't find product/vendor");
-			}
+		}
+		if (pos == 1) {
+			System.out.println("Successful return");
+		}
+		else {
+			System.out.println("Invalid Product/Vendor");
 		}
 	}
 	public static void viewHighestVendor(ArrayList<Product> productList) {
-	      C206_CaseStudy.addReturnVendor(productList);
+	      
 	      int highestpoints = 0;
+	      String vendorName = "";
 	      for (int i = 0; i<productList.size(); i++) {
 	        if (highestpoints < productList.get(i).getPoints()) {
-	          highestpoints = productList.get(i).getPoints();}
-	         
-	    System.out.println(productList.get(i).getVendor());}}
+	          highestpoints = productList.get(i).getPoints();
+	          vendorName = productList.get(i).getVendor();
+	        }
+	    }System.out.println("Highest vendor is "+ vendorName);
+	 }
 	      
 //=======================Search for vendor================================
 	public static void findVendor(ArrayList<Product> productList) {
