@@ -275,8 +275,10 @@ public class C206_CaseStudy {
 	      int highestpoints = 0;
 	      for (int i = 0; i<productList.size(); i++) {
 	        if (highestpoints < productList.get(i).getPoints()) {
-	          highestpoints = productList.get(i).getPoints();
-	          System.out.println(highestpoints.getPoints());
+	          highestpoints = productList.get(i).getPoints();}
+	         
+	    System.out.println(productList.get(i).getVendor());}}
+	      
 //=======================Search for vendor================================
 	public static void findVendor(ArrayList<Product> productList) {
 		String v = Helper.readString("Enter the vendor you want to find > ");
