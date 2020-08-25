@@ -154,18 +154,18 @@ public class C206_CaseStudyTest {
 		assertEquals("Test if that product arraylist size is 0?", 0, productList.size());
 		// DELETE ERROR
 		assertNotNull("Test if a product has been deleted despite product list being null", productList);
+	}
 		
 		// search for vendor normal 
-		assertEquals("Test that vendor is displayed", );
+		
 		// search for vendor error
 		// search for vendor boundary 
 		
 		public void TopVendorsreturnTest() {
 		    // boundary
-		    assertNotNull("Test if there is valid vendor in the arraylist to return ", productList);
-		    C206_CaseStudy.addProduct(productList, p1);
-		    C206_CaseStudy.addProduct(productList, p2);
+			assertEquals("Test if that product arraylist size is 0?", 0, productList.size());
 		    
+		  
 		    // normal - Given an empty list, after returning 2 vendors, test if the size of the list is 0
 		    C206_CaseStudy.addProduct(productList, p1);
 		    C206_CaseStudy.addProduct(productList, p2);
