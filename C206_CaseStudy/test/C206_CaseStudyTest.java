@@ -107,9 +107,9 @@ public class C206_CaseStudyTest {
 	@Before
 	public void setUp2() throws Exception {
 		// insert test data
-		p1 = new Product("Banana", "fruits", 4);
-		p2 = new Product("Apple", "fruits", 2);
-		productList = new ArrayList<Product>();
+		p1 = new Product("Banana", "fruits", 4, "f");
+		p2 = new Product("Apple", "fruits", 2, "c");
+		
 
 	}
 
@@ -154,6 +154,29 @@ public class C206_CaseStudyTest {
 		assertEquals("Test if that product arraylist size is 0?", 0, productList.size());
 		// DELETE ERROR
 		assertNotNull("Test if a product has been deleted despite product list being null", productList);
+		
+		// search for vendor normal 
+		assertEquals("Test that vendor is displayed", );
+		// search for vendor error
+		// search for vendor boundary 
+		
+		public void TopVendorsreturnTest() {
+		    // boundary
+		    assertNotNull("Test if there is valid vendor in the arraylist to return ", productList);
+		    C206_CaseStudy.addProduct(productList, p1);
+		    C206_CaseStudy.addProduct(productList, p2);
+		    
+		    // normal - Given an empty list, after returning 2 vendors, test if the size of the list is 0
+		    C206_CaseStudy.addProduct(productList, p1);
+		    C206_CaseStudy.addProduct(productList, p2);
+		    C206_CaseStudy.addReturnVendor(productList);
+		    assertEquals("Test that the vendor in product arraylist size is 0", 0, productList.size());
+		      
+		    // Test that the top vendor return in the productList can't be viewed if it's empty - error
+		    assertEquals("Test that vendor in the productList is empty after return", 0, productList.size());
+		      
+		  
+		
 	}
 
 	@Before
@@ -173,9 +196,9 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp3() throws Exception {
-		c1 = new Customer(22, "Brenda", 12345678);
-		c2 = new Customer(33, "Max", 88237651);
-		c3 = new Customer (44, "May", 123456789);
+		c1 = new Customer(22, "Brenda", 12345678, 3);
+		c2 = new Customer(33, "Max", 88237651, 2);
+		c3 = new Customer (44, "May", 123456789, 1);
 		customerList = new ArrayList<Customer>();
 
 	}
