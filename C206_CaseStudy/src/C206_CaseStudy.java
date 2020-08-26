@@ -9,9 +9,11 @@ public class C206_CaseStudy {
 	private static final int Add_Product = 1;
 	private static final int View_ProductList = 3;
 	private static final int Delete_Product = 2;
-	private static final int OPTION_ARCHIVETRANSACTION = 2;
-	private static final int OPTION_ADDTRANSACTION = 1;
-	private static final int OPTION_VIEWALLTRANSACTION = 3;
+	private static final int OPTION_UPDATETRANSACTION = 4;
+	private static final int OPTION_ARCHIVETRANSACTION = 3;
+	private static final int OPTION_ADDTRANSACTION = 2;
+	private static final int OPTION_VIEWALLTRANSACTION = 1;
+	private static final int OPTION_QUIT = 0;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -19,15 +21,29 @@ public class C206_CaseStudy {
 		ArrayList<Product> productList = new ArrayList<Product>();
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		ArrayList<Outlet> outletList = new ArrayList<Outlet>();
+<<<<<<< HEAD
 		ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
 		ArrayList<Transaction> archiveList = new ArrayList<Transaction>();
 
 		staffList.add(new Staff(12, "Tom", "12122000", 898));
 		staffList.add(new Staff(13, "Tim", "09112000", 898));
+=======
+		 ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+		    ArrayList<Transaction> archiveList = new ArrayList<Transaction>();
+		    C206_CaseStudy.archiveTransaction(transactionList, archiveList);
+		    C206_CaseStudy.viewTransaction(transactionList);
+		    C206_CaseStudy.updateTransaction(transactionList);
+		    C206_CaseStudy.viewProductTransaction(transactionList);
+		    
+		staffList.add(new Staff(12, "Tom", "12122000"));
+		staffList.add(new Staff(13, "Tim", "09112000"));
+>>>>>>> branch 'master' of https://github.com/19020200-Bunga-Thalia/C206_CaseStudy
 		customerList.add(new Customer(1, "Lisa", 88294751, 1));
 		customerList.add(new Customer(2, "Chad", 95667208, 2));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
+		
+		
 
 		int option = -1;
 
@@ -150,7 +166,7 @@ public class C206_CaseStudy {
 
 	}
 
-	// ================STAFF (ALVIN) =======================
+	 // ================STAFF (ALVIN) =======================
 
 //================View staff=======================
 	public static String retrieveAllStaff(ArrayList<Staff> staffList) {
@@ -488,57 +504,105 @@ public class C206_CaseStudy {
 
 	// =====================TRANSACTION(VALERIE)===========================
 
-	// ================================= View
-	// Transaction=================================
-	public static String retrieveTransaction(ArrayList<Transaction> transactionList) {
-		String output = "";
+			  private static void menu() {
+			    // TODO Auto-generated method stub
+			    C206_CaseStudy.setHeader("C206_CaseStudy");
+			    System.out.println("1. View Transaction");
+			    System.out.println("2. Add Transaction");
+			    System.out.println("3. Archive Transaction");
+			    System.out.println("4. Update Transaction");
+			    System.out.println("5. Quit");
+			    Helper.line(80, "-");
+			    
+			  }
+			  //================================= Option 1 View =================================
+			  public static String retrieveTransaction(ArrayList<Transaction> transactionList) {
+			    String output = "";
 
-		for (int i = 0; i < transactionList.size(); i++) {
-			output += String.format("%-84s \n", transactionList.get(i).toString());
+			    for (int i = 0; i < transactionList.size(); i++) {
+			      output += String.format("%-20d %-20s \n", transactionList.get(i).getTransactionID(), transactionList.get(i).getTransactionName());
+			      
+			    }
+			    return output;
+			  }
+			  public static void viewTransaction(ArrayList<Transaction> transactionList) {
+			    C206_CaseStudy.setHeader("TRANSACTION LIST");
+			    String output = String.format("%-20s %-20s \n", "ID", "NAME");
+			     output += retrieveTransaction(transactionList);
+			    System.out.println(output);
+			  }
+			  
+			  //================================= Option 2 Add =================================
+			    public static Transaction inputTransaction() {
+			      int id = Helper.readInt("Enter ID > ");
+			      String name = Helper.readString("Enter Name > ");
 
-		}
-		return output;
-	}
+		
+			Transaction addTrans= new Transaction(id, name);
+			      return addTrans;
+			      
+			    }
+			    public static void addTransaction(ArrayList<Transaction> transactionList, Transaction addTrans) {
+			      
+			      transactionList.add(addTrans);
+			      System.out.println("Transaction added");
+			    }
+			    
+			  //================================= Option 3 Archive =================================
+			    public static void archiveTransaction(ArrayList<Transaction> transactionList, ArrayList<Transaction> archiveList) {
+			      C206_CaseStudy.viewTransaction(transactionList);
+			      int id = Helper.readInt("Enter ID > ");
+			      String name = Helper.readString("Enter Name > ");
+			      
+			      for (int i = 0; i < transactionList.size(); i++) {
+			        if (id == transactionList.get(i).getTransactionID()) {
+			          archiveList.add(new Transaction(id, name));
+			          transactionList.remove(i);
+			        }
+			        else {
+			          System.out.println("Transaction does not exist");
+			        }
+			      } // end of For Loop
+			    }
+			    
+			  //================================= Option 4 Update =================================
+			    public static void updateTransaction(ArrayList<Transaction> transactionList) {
+			      boolean isCorrect = false;
+			      
+			      while (isCorrect == true) {
+			        
+			      
+			      int id = Helper.readInt("Enter ID > ");
+			    String name = Helper.readString("Enter Name > ");
+			    
+			      for (int i = 0; i < transactionList.size(); i++) {
+			        if (id == transactionList.get(i).getTransactionID() && name == transactionList.get(i).getTransactionName()) {
+			          isCorrect = true;
+			          
+			          boolean isTrue = false;
+			          
+			          while (isTrue == false) {
+			            String new1 = Helper.readString("Enter a new name > ");
+			            if (new1 == transactionList.get(i).getTransactionName()) {
+			              System.out.println("There is no change in your name.");
+			              isTrue = false;
+			            } else {
+			              System.out.println("Your name has been updated: " + new1);
+			              transactionList.get(i).setTransactionName(new1);
+			              isTrue = true;
+			            }
+			          } //end of While Loop
+			        }
+			        else {
+			          System.out.println("id or name is incorrect, please try again.");
+			        }
+			      } //end of For Loop
+			      } //end of While Loop
+			    }
+			    
+			  //================================= Option 5 Link to Product =================================
+			    public static void viewProductTransaction(ArrayList<Transaction> transactionList) {
+			      
+			    }
 
-	public static void viewTransaction(ArrayList<Transaction> transactionList) {
-		C206_CaseStudy.setHeader("TRANSACTION LIST");
-		String output = String.format("%-10s %-30s \n", "ID", "NAME");
-		output += retrieveTransaction(transactionList);
-		System.out.println(output);
-	}
-
-	// ================================= ADD TRANSACTIONS
-	// =================================
-	public static Transaction inputTransaction() {
-		int id = Helper.readInt("Enter ID > ");
-		String name = Helper.readString("Enter Name > ");
-
-		Transaction addTrans = new Transaction(id, name);
-		return addTrans;
-
-	}
-
-	public static void addTransaction(ArrayList<Transaction> transactionList, Transaction addTrans) {
-
-		transactionList.add(addTrans);
-		System.out.println("Transaction added");
-	}
-
-	// ================================= ARCHIVE TRANSCTIONS
-	// =================================
-	public static void archiveTransaction(ArrayList<Transaction> transactionList, ArrayList<Transaction> archiveList) {
-		C206_CaseStudy.viewTransaction(transactionList);
-		int id = Helper.readInt("Enter ID > ");
-		String name = Helper.readString("Enter Name > ");
-
-		for (int i = 0; i < transactionList.size(); i++) {
-			if (id == transactionList.get(i).getTransactionID()) {
-				archiveList.add(new Transaction(id, name));
-				transactionList.remove(i);
-			} else {
-				System.out.println("Transaction does not exist");
-			}
-		} // end of For Loop
-	}
-
-} // end of C206_CaseStudy
+			} //end of C206_CaseStudy
