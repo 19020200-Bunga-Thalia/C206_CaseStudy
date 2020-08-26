@@ -422,7 +422,7 @@ public class C206_CaseStudy {
 			for (int i = 0; i < customerList.size(); i++) {
 				if (customer_id == customerList.get(i).getCust_id()) {
 					String yesNno = Helper.readString("Are you sure you want to delete this ? (Y/N):");
-					if (yesNno.equalsIgnoreCase("Yes")) {
+					if (yesNno.equalsIgnoreCase("Y")) {
 						customerList.remove(i);
 					}
 					System.out.println(" Customer has been deleted");
