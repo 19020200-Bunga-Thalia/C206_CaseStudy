@@ -136,7 +136,8 @@ public static void search_outlet(ArrayList<Outlet> outletList) {
             
             for (int i = 0; i < outletList.size();i++ ) {
               if (outletName.equalsIgnoreCase(outletList.get(i).getOutlet_name())) {
-                out += String.format("%-20d %-20s %-20s", outletList.get(i).getOutlet_id(), outletList.get(i).getOutlet_name(), outletList.get(i).getStaff());
+                out += String.format("%-20d %-20s %-20s", outletList.get(i).getOutlet_id(),
+                		outletList.get(i).getOutlet_name(), outletList.get(i).getStaff());
                 System.out.println(out);
                 break;
               }
