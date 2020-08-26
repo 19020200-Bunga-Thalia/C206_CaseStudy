@@ -124,9 +124,9 @@ public class C206_CaseStudy {
 				}
 
 			} else if (option == 5) {
-				System.out.println("1. Add");
-				System.out.println("2. Archive");
-				System.out.println("3. View All");
+				System.out.println("1. View");
+				System.out.println("2. Add");
+				System.out.println("3. Archive");
 				System.out.println("4. Update");
 				option = Helper.readInt("Enter an option > ");
 				if (option == OPTION_VIEWALLTRANSACTION) {
@@ -247,7 +247,7 @@ public class C206_CaseStudy {
 	public static String retrieveProductList(ArrayList<Product> productList) {
 		String output = " ";
 		for (int i = 0; i < productList.size(); i++) {
-			output += String.format("%-20s %-20s $%-20.2f %-20s \n", productList.get(i).getProductName(),
+			output += String.format("%-20s %-20s %-20s $%-20.2f %-20s \n", productList.get(i).getProductName(),
 					productList.get(i).getDescription(), productList.get(i).getCategory(),
 					productList.get(i).getprice(), productList.get(i).getVendor());
 
@@ -623,7 +623,7 @@ public class C206_CaseStudy {
 			}
 
 		} // end of For Loop
-		String confirm = Helper.readString("Confirm plus chop archive? (Y/N) > ");
+		String confirm = Helper.readString("Archive Transaction? (Y/N) > ");
 		if (confirm.equalsIgnoreCase("Y")) {
 			archiveList.add(new Transaction(transactionList.get(pos).getTransactionID(),
 					transactionList.get(pos).getTransactionName(), transactionList.get(pos).getProductName()));

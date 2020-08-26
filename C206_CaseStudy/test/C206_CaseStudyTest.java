@@ -136,8 +136,8 @@ public class C206_CaseStudyTest {
 	public void add_producttest() {
 
 		// ADD NORMAL
-		C206_CaseStudy.addProduct(productList, p1);
-		assertEquals("Test if product arraylist is 1?", 1, productList.size());
+		productList.add(p1);
+		assertEquals("Test if customer arraylist size is 1?", 1, productList.size());
 		// ADD (BOUNDARY)
 		assertNotNull("Check if there is any item inside the product arraylist ", productList);
 
