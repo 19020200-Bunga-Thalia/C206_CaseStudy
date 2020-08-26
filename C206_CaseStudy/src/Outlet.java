@@ -1,5 +1,5 @@
 public class Outlet {
-	// class
+	//class
     private int outlet_id;
     private String outlet_name;
     private String staff_name;

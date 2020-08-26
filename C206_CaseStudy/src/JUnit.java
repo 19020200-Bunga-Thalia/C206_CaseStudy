@@ -11,7 +11,7 @@ public class JUnit {
     @Before
     public void setUp() throws Exception {
       out1 = new Outlet(898,"Singapore Outlet","Karen");
-      out2 = new Outlet(898,"Singapore Outlet","Karen");
+      out2 = new Outlet(899,"Jurong Outlet","James");
     }
 // 
     @After

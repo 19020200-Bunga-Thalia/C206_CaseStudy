@@ -1,6 +1,5 @@
 import java.util.ArrayList;
   public class OutletDB {
-    //subclass
     //GRACE
 
     public static ArrayList<Outlet> outletList = new ArrayList<>();

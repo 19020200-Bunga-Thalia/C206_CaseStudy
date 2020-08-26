@@ -8,7 +8,7 @@ public class main {
     ArrayList<Outlet> outletList = new ArrayList<Outlet>();
     
     outletList.add(new Outlet(898,"Singapore Outlet","Karen"));
-    outletList.add(new Outlet(899,"JUrong Outlet","James"));
+    outletList.add(new Outlet(899,"Jurong Outlet","James"));
     
     int option = 0;
     main.menu();
