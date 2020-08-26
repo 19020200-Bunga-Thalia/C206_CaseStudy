@@ -236,7 +236,7 @@ public class C206_CaseStudy {
 		}
 	}
 	
-//	// =====================PRODUCT (KARLA)===========================
+	// =====================PRODUCT (KARLA)===========================
 
 	// ====================== view product =========================
 	public static String retrieveProductList(ArrayList<Product> productList) {
