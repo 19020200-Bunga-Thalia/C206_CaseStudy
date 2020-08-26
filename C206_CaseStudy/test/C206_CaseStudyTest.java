@@ -421,7 +421,7 @@ public class C206_CaseStudyTest {
 	  
 	  @Test
 	  public void archiveTransactionInfoTest() {
-	    ArrayList<Transaction> archiveList = null;
+		  ArrayList<Transaction> archiveList = new ArrayList<Transaction>();
 	    //==========Archive Transaction==========
 	    //normal (After archiving an old transaction, transaction list size will reduce);
 	    C206_CaseStudy.archiveTransaction(transactionList, archiveList);
