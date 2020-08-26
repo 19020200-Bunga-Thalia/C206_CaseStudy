@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.Collections;
 //
 //
+
+
 
 public class C206_CaseStudy {
 
@@ -13,26 +16,21 @@ public class C206_CaseStudy {
 	private static final int OPTION_ADDTRANSACTION = 2;
 	private static final int OPTION_VIEWALLTRANSACTION = 1;
 
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<Staff> staffList = new ArrayList<Staff>();
 		ArrayList<Product> productList = new ArrayList<Product>();
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		ArrayList<Outlet> outletList = new ArrayList<Outlet>();
-		 ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+		ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
 		ArrayList<Transaction> archiveList = new ArrayList<Transaction>();
-		    
-		    
-		    
+
 		staffList.add(new Staff(12, "Tom", "12122000", 1));
 		staffList.add(new Staff(13, "Tim", "09112000", 2));
 		customerList.add(new Customer(1, "Lisa", 88294751, 1));
 		customerList.add(new Customer(2, "Chad", 95667208, 2));
-		outletList.add(new Outlet(898, "Karla outlet", "Karen", "West Coast Outlet", "Jurong Outlet"," Susan" , "Tampines Outlet"));
-		outletList.add(new Outlet(900, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet", "Susan" , "Tampines Outlet")); 
-	
-
+		outletList.add(new Outlet(898, "Karla outlet", "Karen"));
+		outletList.add(new Outlet(900, "Singapore Outlet", "Jim"));
 
 		int option = -1;
 
@@ -367,10 +365,27 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 		String output = String.format("%-25s %-25s %-25s %-25s \n", "CUSTOMER ID", "CUSTOMER NAME", "CONTACT NUMBER",
 				"NO. OF RETURNS");
-		output += retrieveAllCustomer(customerList);
-		System.out.println(output);
-	}
-
+		System.out.println("View By: ");
+		System.out.println("1. Customer ID");
+		System.out.println("2. Return History ");
+		int view_by = Helper.readInt("Enter option: ");
+		if (view_by == 1) {
+			output += retrieveAllCustomer(customerList);
+			System.out.println(output);
+		} else {
+			Collections.sort(customerList);
+			String output1 = "";
+			for (int x = 0; x < customerList.size(); x++) {
+				output += String.format("%-25d %-25s %-25d %-25d \n", customerList.get(x).getCust_id(),
+						customerList.get(x).getCust_name(), customerList.get(x).getCust_phone(),
+						customerList.get(x).getCust_returns());
+			}
+			output += output1;
+			System.out.println(output);
+		}
+				
+		}
+			
 	// ======================= ADD CUSTOMER=========================
 	public static void addCustomer(ArrayList<Customer> customerList) {
 		int customer_id = 0;
@@ -406,7 +421,7 @@ public class C206_CaseStudy {
 			int customer_id = Helper.readInt("Enter Customer ID that you want to remove :");
 			for (int i = 0; i < customerList.size(); i++) {
 				if (customer_id == customerList.get(i).getCust_id()) {
-					String yesNno = Helper.readString("Are you sure you want to delete this ? (Yes/No):");
+					String yesNno = Helper.readString("Are you sure you want to delete this ? (Y/N):");
 					if (yesNno.equalsIgnoreCase("Yes")) {
 						customerList.remove(i);
 					}
@@ -422,8 +437,11 @@ public class C206_CaseStudy {
 		for (int i = 0; i < customerList.size(); i++) {
 			if (customer_id == customerList.get(i).getCust_id()) {
 				int updated_returns = Helper.readInt("Enter updated number of returns: ");
-				customerList.get(i).getCust_returns();
-
+				String confirm = Helper.readString("Confirm changes made? (Y/N): ");
+				if (confirm.equalsIgnoreCase("Yes")) {
+					customerList.get(i).setCust_returns(updated_returns);
+					System.out.println("Customer return history updated");
+				}
 			}
 		}
 	}
@@ -440,14 +458,10 @@ public class C206_CaseStudy {
 		if (outletList.isEmpty()) {
 			System.out.println("There is no outlet available.");
 		} else {
-			String out = String.format(" %-10s %-5s %-15s %-20s %-5s %-20s %-15s\n ", "OUTLET ID", "OUTLET NAME ",
-					"STAFF OUTLET ", "AVAILABLE OUTLET", "UNAVAILABLE OUTLET", "UPDATE STAFF PER OUTLET",
-					"SEARCH AN OUTLET");
+			String out = String.format(" %-20s %-20s %-20s \n ", "OUTLET ID", "OUTLET NAME ", "STAFF NAME");
 			for (int i = 0; i < outletList.size(); i++) {
 				Outlet sss = outletList.get(i);
-				out += String.format("%-10d %-5s %-15s %-20s %-5s %-20s %-15s\n", sss.getOutlet_id(),
-						sss.getOutlet_name(), sss.getStaff_outlet(), sss.getAvailable_outlet(),
-						sss.getUnavailable_outlet(), sss.getupdatestaffper_outlet(), sss.getsearch_outlet());
+				out += String.format("%-20s %-20s %-20s\n", sss.getOutlet_id(), sss.getOutlet_name(), sss.getStaff());
 			}
 			System.out.println(out);
 		}
@@ -456,25 +470,16 @@ public class C206_CaseStudy {
 	// =====================ADD OUTLETS===========================
 	public static void addAllOutlet(ArrayList<Outlet> outletList) {
 		Helper.line(45, "=");
-		System.out.println("add outlet List");
+		System.out.println("add outlet ");
 		Helper.line(45, "=");
 
-		if (outletList.isEmpty()) {
-			System.out.println("There is no outlet available.");
-		} else {
-			String out = String.format(" %-10s %-5s %-15s %-20s %-5s %-20s %-15s\n ", "OUTLET ID", "OUTLET NAME ",
-					"STAFF OUTLET ", "AVAILABLE OUTLET", "UNAVAILABLE OUTLET", "UPDATE STAFF PER OUTLET",
-					"SEARCH AN OUTLET");
-			for (int i = 0; i < outletList.size(); i++) {
-				Outlet sss = outletList.get(i);
-				out += String.format("%-10d %-5s %-15s %-20s %-5s %-20s %-15s\n", sss.getOutlet_id(),
-						sss.getOutlet_name(), sss.getStaff_outlet(), sss.getAvailable_outlet(),
-						sss.getUnavailable_outlet(), sss.getupdatestaffper_outlet(), sss.getsearch_outlet());
+		int outletID = Helper.readInt("Enter Outlet ID: ");
+		String outletName = Helper.readString("Enter Outlet Name: ");
+		String staffName = Helper.readString("Enter staff name: ");
+		Outlet ou = new Outlet(outletID, outletName, staffName);
 
-			}
-			System.out.println(out);
-		}
-
+		outletList.add(ou);
+		System.out.println("Added");
 	}
 
 	// =====================DELETE OUTLETS===========================
@@ -484,22 +489,15 @@ public class C206_CaseStudy {
 		System.out.println("delete outlet List");
 		Helper.line(45, "=");
 
-		if (outletList.isEmpty()) {
-
-			System.out.println("There is no outlet available.");
-		} else {
-			String out = String.format(" %-10s %-5s %-15s %-20s %-5s %-20s %-15s\n ", "OUTLET ID", "OUTLET NAME ",
-					"STAFF OUTLET ", "AVAILABLE OUTLET", "UNAVAILABLE OUTLET", "UPDATE STAFF PER OUTLET",
-					"SEARCH AN OUTLET");
-			for (int i = 0; i < outletList.size(); i++) {
-				Outlet sss = outletList.get(i);//
-				out += String.format("%-10d %-5s %-15s %-20s %-5s %-20s %-15s\n", sss.getOutlet_id(),
-						sss.getOutlet_name(), sss.getStaff_outlet(), sss.getAvailable_outlet(),
-						sss.getUnavailable_outlet(), sss.getupdatestaffper_outlet(), sss.getsearch_outlet());
-
+		int id = Helper.readInt("Enter outlet ID to be deleted: ");
+		int pos = -1;
+		for (int i = 0; i < outletList.size(); i++) {
+			if (id == outletList.get(i).getOutlet_id()) {
+				pos = i;
 			}
-			System.out.println(out);
 		}
+		outletList.remove(pos);
+		System.out.println("Removed");
 	}
 
 	public static void updatestaffper_outlet1(ArrayList<Outlet> outletList) {
@@ -507,68 +505,34 @@ public class C206_CaseStudy {
 		System.out.println("update staff per outlet");
 		Helper.line(45, "=");
 
-		boolean isUpdate = false;
+		int id = Helper.readInt("Enter outlet ID to update: ");
 
-		while (isUpdate == false) {
-			int outletid = Helper.readInt("Enter the outlet ID   : ");
-
-			// if wrong keep asking
-			for (int i = 0; i < outletList.size(); i++) {
-
-				if (outletid == outletList.get(i).getOutlet_id()) {
-					String staffname = Helper.readString("Enter new staff name  : ");
-
-					outletList.get(i).setStaff_outlet(staffname);
-
-					System.out.println("You have successfully updated new staff!");
-
-					isUpdate = true;
-				}
-			}
-			// break;
-
-			if (isUpdate == false) {
-				System.out.println("There is no such outlet ID.");
-
+		for (int i = 0; i < outletList.size(); i++) {
+			if (id == outletList.get(i).getOutlet_id()) {
+				String outletName = Helper.readString("Enter new outlet name: ");
+				String staffName = Helper.readString("Enter new staff name: ");
+				outletList.get(i).setOutlet_name(outletName);
+				outletList.get(i).setStaff_outlet(staffName);
 			}
 		}
 	}
 
-	public static void search_outlet1(ArrayList<Outlet> outletList) {
+	public static void search_outlet(ArrayList<Outlet> outletList) {
 		Helper.line(45, "=");
 		System.out.println("search an outlet");
 		Helper.line(45, "=");
+		String outletName = Helper.readString("Enter outlet name: ");
+		String out = String.format(" %-20s %-20s %-20s \n ", "OUTLET ID", "OUTLET NAME ", "STAFF NAME");
 
-		String searchoutletName = Helper.readString("Enter outlet ID to search :");
-		String output = String.format("%-10s %-25s %-40s %-55s %-55s %-40s %-15s\n ", "outlet ID ", "outlet name",
-				"staff outlet ", "Available outlet", "Unavailable outlet", "Update staff per outlet",
-				"Search an outlet");
 		for (int i = 0; i < outletList.size(); i++) {
-			if (outletList.get(i).getOutlet_name().equalsIgnoreCase(searchoutletName)) {
-				Outlet sss = outletList.get(i);
-				output += String.format("%-10d %-25s %-40s %-55s %-55s %-40s %-15s\n", sss.getOutlet_id(),
-						sss.getOutlet_name(), sss.getStaff_outlet(), sss.getAvailable_outlet(),
-						sss.getUnavailable_outlet(), sss.getupdatestaffper_outlet(), sss.getsearch_outlet());
+			if (outletName.equalsIgnoreCase(outletList.get(i).getOutlet_name())) {
+				out += String.format("%-20d %-20s %-20s", outletList.get(i).getOutlet_id(),
+						outletList.get(i).getOutlet_name(), outletList.get(i).getStaff());
+				System.out.println(out);
+				break;
 			}
-
 		}
-		System.out.println(output);
 
-		if (outletList.isEmpty()) {
-			System.out.println("There is no outlet available.");
-		} else {
-			String out = String.format(" %-10s %-5s %-15s %-20s %-5s %-20s %-15s\n ", "OUTLET ID", "OUTLET NAME ",
-					"STAFF OUTLET ", "AVAILABLE OUTLET", "UNAVAILABLE OUTLET", "UPDATE STAFF PER OUTLET",
-					"SEARCH AN OUTLET");
-			for (int i = 0; i < outletList.size(); i++) {
-				Outlet sss = outletList.get(i);//
-				out += String.format("%-10d %-5s %-15s %-20s %-5s %-20s %-15s\n", sss.getOutlet_id(),
-						sss.getOutlet_name(), sss.getStaff_outlet(), sss.getAvailable_outlet(),
-						sss.getUnavailable_outlet(), sss.getupdatestaffper_outlet(), sss.getsearch_outlet());
-
-			}
-			System.out.println(out);
-		}
 	}
 	// =====================TRANSACTION(VALERIE)===========================
 
@@ -661,6 +625,7 @@ public class C206_CaseStudy {
 		}
 
 	}// end method
+
 	public static void setHeader(String header) {
 		Helper.line(80, "-");
 		System.out.println(header);

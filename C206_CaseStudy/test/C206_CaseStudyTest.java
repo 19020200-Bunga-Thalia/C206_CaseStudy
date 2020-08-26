@@ -315,8 +315,8 @@ public class C206_CaseStudyTest {
 	// ============GRACE=========
 	@Before
 	public void setUp4() throws Exception {
-		o1 = new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"," Susan" , "Tampines Outlet");
-		o2 = new Outlet(900, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet", "Susan" , "Tampines Outlet");
+		o1 = new Outlet(898, "Singapore Outlet", "Karen");
+		o2 = new Outlet(900, "Singapore Outlet", "Jim");
 	}
 
 	@After
@@ -372,7 +372,7 @@ public class C206_CaseStudyTest {
 		for (int i = 0; i < OutletDB.outletList.size(); i++) {
 			testoutput1 += "Outlet Name: " + OutletDB.outletList.get(i).getOutlet_name() + "\n";
 			testoutput1 += "Outlet ID: " + OutletDB.outletList.get(i).getOutlet_id() + "\n";
-			testoutput1 += "Staff Outlet: " + OutletDB.outletList.get(i).getStaff_outlet() + "\n";
+			testoutput1 += "Staff Outlet: " + OutletDB.outletList.get(i).getStaff() + "\n";
 		}
 		assertEquals("Test that the expected output string same as the list of outlet retrieved from the outlet.",
 				testoutput1, alloutlet);
