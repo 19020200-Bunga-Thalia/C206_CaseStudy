@@ -179,13 +179,6 @@ public class C206_CaseStudyTest {
 		
 	}
 
-	@Before
-	public void setUp22() throws Exception {
-		t = new Transaction(19010017, "Valerie");
-
-		transactionList = new ArrayList<Transaction>();
-	}
-
 	@After
 	public void tearDown22() throws Exception {
 		t = null;
@@ -356,11 +349,11 @@ public class C206_CaseStudyTest {
 
 	
 
-	// ============VALERIE=========
+	// ============VALERIE==========
 
 	 @Before
 	  public void setUp() throws Exception {
-	    t = new Transaction(19010017, "Valerie");
+	    t = new Transaction(19010017, "Valerie", "Product 1");
 	    
 	    transactionList = new ArrayList<Transaction>();
 	  }
@@ -428,6 +421,20 @@ public class C206_CaseStudyTest {
 	    
 	  }
 	  
-
-
+	  @Test
+	  public void updateATransactionInfoTest() {
+		//==========Update a Transaction==========
+		//normal (Update a transaction from the transaction list);
+		  C206_CaseStudy.updateTransaction(transactionList, productList);
+		  assertEquals("Test if transaction arraylist consists the transaction that one wants to update", 1, transactionList);
+		//error (Update a transaction that is null. System will display an error message);
+		  C206_CaseStudy.updateTransaction(transactionList, productList);
+		  assertNotNull("Test if the transaction list is null when updating", transactionList);
+		//boundary (Transaction list cannot be null before updating);
+		  C206_CaseStudy.updateTransaction(transactionList, productList);
+		  assertNotNull("Test if transaction list is null before updating", transactionList);
+		  
+	  }
+	  
+	  
 	} //end of C206_CaseStudyTest

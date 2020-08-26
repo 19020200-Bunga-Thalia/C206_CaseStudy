@@ -13,6 +13,7 @@ public class C206_CaseStudy {
 	private static final int OPTION_ARCHIVETRANSACTION = 3;
 	private static final int OPTION_ADDTRANSACTION = 2;
 	private static final int OPTION_VIEWALLTRANSACTION = 1;
+	private static final int OPTION_QUIT = 0;
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -20,15 +21,19 @@ public class C206_CaseStudy {
 		ArrayList<Product> productList = new ArrayList<Product>();
 		ArrayList<Customer> customerList = new ArrayList<Customer>();
 		ArrayList<Outlet> outletList = new ArrayList<Outlet>();
-		ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
-		ArrayList<Transaction> archiveList = new ArrayList<Transaction>();
-
-		staffList.add(new Staff(12, "Tom", "12122000", 898));
-		staffList.add(new Staff(13, "Tim", "09112000", 898));
+		 ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
+		    ArrayList<Transaction> archiveList = new ArrayList<Transaction>();
+		    
+		    
+		    
+		staffList.add(new Staff(12, "Tom", "12122000", 1));
+		staffList.add(new Staff(13, "Tim", "09112000", 2));
 		customerList.add(new Customer(1, "Lisa", 88294751, 1));
 		customerList.add(new Customer(2, "Chad", 95667208, 2));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
 		outletList.add(new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"));
+		
+		
 
 		int option = -1;
 
@@ -47,7 +52,6 @@ public class C206_CaseStudy {
 				System.out.println("1. Add");
 				System.out.println("2. Delete");
 				System.out.println("3. View All");
-				System.out.println("4. Update");
 				int suboption = Helper.readInt("Enter option :");
 				if (suboption == 1) {
 					C206_CaseStudy.addStaff(staffList);
@@ -55,11 +59,7 @@ public class C206_CaseStudy {
 					C206_CaseStudy.deleteStaff(staffList);
 				} else if (suboption == 3) {
 					C206_CaseStudy.viewAllStaff(staffList);
-				} else if (suboption == 4) {
-					C206_CaseStudy.updateStaff(staffList);
-				}
-
-				else {
+				} else {
 					System.out.println("Invalid option");
 				}
 			} else if (option == 2) {
@@ -124,39 +124,32 @@ public class C206_CaseStudy {
 				System.out.println("2. Add");
 				System.out.println("3. Archive");
 				System.out.println("4. Update");
-				int suboption = Helper.readInt("Enter an option > ");
-				if (suboption == OPTION_VIEWALLTRANSACTION) {
+				option = Helper.readInt("Enter an option > ");
+				if (option == OPTION_VIEWALLTRANSACTION) {
 					// View all transactions
 					C206_CaseStudy.setHeader("VIEW");
 					C206_CaseStudy.viewTransaction(transactionList);
 
-				} else if (suboption == OPTION_ADDTRANSACTION) {
+				} else if (option == OPTION_ADDTRANSACTION) {
 					// Add transaction
 					C206_CaseStudy.setHeader("ADD");
 					Transaction addTrans = inputTransaction();
 					C206_CaseStudy.addTransaction(transactionList, addTrans);
 
-				} else if (suboption == OPTION_ARCHIVETRANSACTION) {
+				} else if (option == OPTION_ARCHIVETRANSACTION) {
 					// Archive Transaction
 					C206_CaseStudy.setHeader("Archive");
 					C206_CaseStudy.archiveTransaction(transactionList, archiveList);
 
-				} else if (suboption== OPTION_UPDATETRANSACTION) {
-					// Update Transaction
-					C206_CaseStudy.setHeader("Update");
-					C206_CaseStudy.updateTransaction(transactionList);
-
-				} else if (suboption == 5) {
-					// Link to a Product
-					C206_CaseStudy.setHeader("Link to a product");
-					C206_CaseStudy.viewProductTransaction(transactionList);
-
 				}
+				else if (option == OPTION_UPDATETRANSACTION) {
+					C206_CaseStudy.updateTransaction(transactionList, productList);
 
-			} else if (option == 6) {
+			} else if (option == 5) {
 				System.out.println("Program Exit");
 			} else {
 				System.out.println("Invalid Option");
+			}
 			}
 		}
 
@@ -168,9 +161,8 @@ public class C206_CaseStudy {
 	public static String retrieveAllStaff(ArrayList<Staff> staffList) {
 		String output = "";
 		for (int i = 0; i < staffList.size(); i++) {
-			output += String.format("%-25d %-25s %-25s %-25s \n", staffList.get(i).getStaff_id(),
-					staffList.get(i).getStaff_name(), staffList.get(i).getStaff_birthdate(),
-					staffList.get(i).getStaff_outletID());
+			output += String.format("%-25d %-25s %-25s \n", staffList.get(i).getStaff_id(),
+					staffList.get(i).getStaff_name(), staffList.get(i).getStaff_birthdate());
 		}
 		return output;
 	}
@@ -179,7 +171,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 		System.out.println("STAFF LIST");
 		Helper.line(80, "-");
-		String output = String.format("%-25s %-25s %-25s %-25s \n", "STAFF ID", "STAFF NAME", "BIRTHDATE", "OUTLET ID");
+		String output = String.format("%-25s %-25s %-25s \n", "STAFF ID", "STAFF NAME", "BIRTHDATE");
 		output += retrieveAllStaff(staffList);
 		System.out.println(output);
 	}
@@ -190,7 +182,7 @@ public class C206_CaseStudy {
 		int staff_id = Helper.readInt("Enter Staff ID : ");
 		String staff_name = Helper.readString("Enter Staff name : ");
 		String staff_birthdate = Helper.readString("Enter birthdate (DDMMYYYY) : ");
-		int staff_outletID = Helper.readInt("Enter staff outlet ID: ");
+		int staff_outletID = Helper.readInt("Enter staff outlet ID : ");
 		Staff st = new Staff(staff_id, staff_name, staff_birthdate, staff_outletID);
 		staffList.add(st);
 		System.out.println("Staff added");
@@ -224,32 +216,13 @@ public class C206_CaseStudy {
 			}
 		}
 	}
-
-	// ================Update staff=======================
-	public static void updateStaff(ArrayList<Staff> staffList) {
-		int updatestaff1 = Helper.readInt("Enter ID of Staff to update: ");
-		for (int i = 0; i < staffList.size(); i++) {
-			if (updatestaff1 == staffList.get(i).getStaff_id()) {
-				int update_staffid = Helper.readInt("Enter new staff ID: ");
-				String update_staffname = Helper.readString("Enter new name ");
-				String update_staffbirthdate = Helper.readString("Enter new birthdate: ");
-				int update_staffoutlet = Helper.readInt("Enter new outlet ID: ");
-				staffList.get(i).setStaff_id(update_staffid);
-				staffList.get(i).setStaff_name(update_staffname);
-				staffList.get(i).setStaff_birthdate(update_staffbirthdate);
-				staffList.get(i).setStaff_outletID(update_staffoutlet);
-
-			}
-		}
-	}
-
 	// =====================PRODUCT (KARLA)===========================
 
 	// ====================== view product =========================
 	public static String retrieveProductList(ArrayList<Product> productList) {
 		String output = " ";
 		for (int i = 0; i < productList.size(); i++) {
-			output += String.format("%-20s %-20s $%-20.2f %-20s \n", productList.get(i).getProductName(),
+			output += String.format("%-20s %-20s $%-20.2f %-20s \n", productList.get(i).getProductName(),productList.get(i).getDescription(),
 					productList.get(i).getCategory(), productList.get(i).getprice(), productList.get(i).getVendor());
 
 		}
@@ -257,7 +230,7 @@ public class C206_CaseStudy {
 	}
 
 	public static void viewProductList(ArrayList<Product> productList) {
-		String output = String.format("%-20s %-20s %-20s %-20s\n", "Product Name", "Category", "Price", "Vendor");
+		String output = String.format("%-20s %-20s %-20s %-20s %-20s\n", "Product Name","Description", "Category", "Price", "Vendor");
 		output += C206_CaseStudy.retrieveProductList(productList);
 		System.out.println(output);
 	}
@@ -265,10 +238,11 @@ public class C206_CaseStudy {
 //======================= ADD PRODUCT========================= 
 	public static Product inputProduct() {
 		String productName = Helper.readString("Enter a product to add > ");
+		String description = Helper.readString("Enter description of product");
 		String category = Helper.readString("Enter category of product > ");
 		double price = Helper.readDouble("Enter price of product > ");
 		String vendor = Helper.readString("Enter vendor of product > ");
-		Product p = new Product(productName, category, price, vendor);
+		Product p = new Product(productName, description, category, price, vendor);
 		return p;
 	}
 
@@ -301,7 +275,7 @@ public class C206_CaseStudy {
 		String returnProduct = Helper.readString("Enter product to return > ");
 		String returnVendor = Helper.readString("Enter vendor to return > ");
 		int pos = 0;
-		for (int i = 0; i < productList.size(); i++) {
+		for (int i = 0; i< productList.size(); i++) {
 			if ((returnProduct.equalsIgnoreCase(productList.get(i).getProductName())
 					&& (returnVendor.equalsIgnoreCase(productList.get(i).getVendor())))) {
 				productList.get(i).setPoints(productList.get(i).getPoints() + 1);
@@ -314,6 +288,7 @@ public class C206_CaseStudy {
 		} else {
 			System.out.println("Invalid Product/Vendor");
 		}
+	
 	}
 
 	public static void viewHighestVendor(ArrayList<Product> productList) {
@@ -365,16 +340,8 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 		String output = String.format("%-25s %-25s %-25s %-25s \n", "CUSTOMER ID", "CUSTOMER NAME", "CONTACT NUMBER",
 				"NO. OF RETURNS");
-		System.out.println("View By: ");
-		System.out.println("1. Customer ID");
-		System.out.println("2. Return History ");
-		int view_by = Helper.readInt("Enter option: ");
-		if (view_by == 1) {
-			output += retrieveAllCustomer(customerList);
-			System.out.println(output);
-		}
-		System.out.println();
-
+		output += retrieveAllCustomer(customerList);
+		System.out.println(output);
 	}
 
 	// ======================= ADD CUSTOMER=========================
@@ -412,7 +379,7 @@ public class C206_CaseStudy {
 			int customer_id = Helper.readInt("Enter Customer ID that you want to remove :");
 			for (int i = 0; i < customerList.size(); i++) {
 				if (customer_id == customerList.get(i).getCust_id()) {
-					String yesNno = Helper.readString("Are you sure you want to delete this ? (Y/N):");
+					String yesNno = Helper.readString("Are you sure you want to delete this ? (Yes/No):");
 					if (yesNno.equalsIgnoreCase("Yes")) {
 						customerList.remove(i);
 					}
@@ -428,15 +395,11 @@ public class C206_CaseStudy {
 		for (int i = 0; i < customerList.size(); i++) {
 			if (customer_id == customerList.get(i).getCust_id()) {
 				int updated_returns = Helper.readInt("Enter updated number of returns: ");
-				String confirm = Helper.readString("Confirm changes made? (Y/N): ");
-				if (confirm.equalsIgnoreCase("Yes")) {
-					customerList.get(i).setCust_returns(updated_returns);
-					System.out.println("Customer return history updated");
-				}
+				customerList.get(i).getCust_returns();
+
 			}
 		}
-			
-		}
+	}
 
 	// =====================OUTLETS(GRACE)===========================
 
@@ -513,111 +476,91 @@ public class C206_CaseStudy {
 
 	// =====================TRANSACTION(VALERIE)===========================
 
-	private static void menu() {
-		// TODO Auto-generated method stub
-		C206_CaseStudy.setHeader("C206_CaseStudy");
-		System.out.println("1. View Transaction");
-		System.out.println("2. Add Transaction");
-		System.out.println("3. Archive Transaction");
-		System.out.println("4. Update Transaction");
-		System.out.println("5. Quit");
-		Helper.line(80, "-");
+			 
+			  //================================= Option 1 View =================================
+			  public static String retrieveTransaction(ArrayList<Transaction> transactionList) {
+			    String output = "";
 
-	}
+			    for (int i = 0; i < transactionList.size(); i++) {
+			      output += String.format("%-20d %-20s %-20s \n", transactionList.get(i).getTransactionID(), transactionList.get(i).getTransactionName(), transactionList.get(i).getProductName());
+			      
+			    }
+			    return output;
+			  }
+			  public static void viewTransaction(ArrayList<Transaction> transactionList) {
+			    C206_CaseStudy.setHeader("TRANSACTION LIST");
+			    String output = String.format("%-20s %-20s %-20s \n", "ID", "NAME", "PRODUCT NAME");
+			     output += retrieveTransaction(transactionList);
+			    System.out.println(output);
+			  }
+			  
+			  //================================= Option 2 Add =================================
+			    public static Transaction inputTransaction() {
+			      int id = Helper.readInt("Enter ID > ");
+			      String name = Helper.readString("Enter Name > ");
+			      String productName = Helper.readString("Enter product > ");
 
-	// ================================= Option 1 View
-	// =================================
-	public static String retrieveTransaction(ArrayList<Transaction> transactionList) {
-		String output = "";
+		
+			Transaction addTrans= new Transaction(id, name, productName);
+			      return addTrans;
+			      
+			    }
+			    public static void addTransaction(ArrayList<Transaction> transactionList, Transaction addTrans) {
+			      
+			      transactionList.add(addTrans);
+			      System.out.println("Transaction added");
+			    }
+			    
+			  //================================= Option 3 Archive =================================
+			    public static void archiveTransaction(ArrayList<Transaction> transactionList, ArrayList<Transaction> archiveList) {
+			      C206_CaseStudy.viewTransaction(transactionList);
+			      int id = Helper.readInt("Enter ID > ");
+			      int pos = -1;
+			      
+			      for (int i = 0; i < transactionList.size(); i++) {
+			        if (id == transactionList.get(i).getTransactionID()) {
+			          pos = i;
+			        }
+			        
+			      } // end of For Loop
+			      String confirm = Helper.readString("Confirm plus chop archive? (Y/N) > ");
+			      if (confirm.equalsIgnoreCase("Y")) {
+			    	  archiveList.add(new Transaction (transactionList.get(pos).getTransactionID(), transactionList.get(pos).getTransactionName(), transactionList.get(pos).getProductName()));
+			    	  transactionList.remove(pos);
+			    	  System.out.println("Archive already");
+			      }
+			    }
+			    
+			  //================================= Option 4 Update======================================
+			    public static void updateTransaction(ArrayList<Transaction> transactionList, ArrayList<Product> productList) {
+			      int id = Helper.readInt("Enter transaction ID > ");
+			      String productDescription = Helper.readString("Enter product description to change > ");
+			      
+			      int p = -1;
+			      int prod = 0;
+			      for (int i = 0; i < transactionList.size(); i++) {
+			    	  if (id == transactionList.get(i).getTransactionID()) {
+			    		  if (transactionList.get(i).getProductName().equalsIgnoreCase(productList.get(prod).getProductName())) {
+			    			  productList.get(prod).setDescription(productDescription);
+			    		  }
+			    		  else {
+			    			  prod += 1;
+			    		  }
+			    		  p = 1;
+			    		  break;
+			    	  
+			    	  }
+			    	  
+			      }
+			      if (p == 1) {
+			    	  System.out.println(productList.get(prod).getProductName() + " description has been changed to " + productList.get(prod).getDescription());
+			      }
+			      else {
+			    	  System.out.println("Invalid Transaction ID");
+			      }
+			      
+			    }// end method
+			    
+			 
 
-		for (int i = 0; i < transactionList.size(); i++) {
-			output += String.format("%-20d %-20s \n", transactionList.get(i).getTransactionID(),
-					transactionList.get(i).getTransactionName());
-
-		}
-		return output;
-	}
-
-	public static void viewTransaction(ArrayList<Transaction> transactionList) {
-		C206_CaseStudy.setHeader("TRANSACTION LIST");
-		String output = String.format("%-20s %-20s \n", "ID", "NAME");
-		output += retrieveTransaction(transactionList);
-		System.out.println(output);
-	}
-
-	// ================================= Option 2 Add
-	// =================================
-	public static Transaction inputTransaction() {
-		int id = Helper.readInt("Enter ID > ");
-		String name = Helper.readString("Enter Name > ");
-
-		Transaction addTrans = new Transaction(id, name);
-		return addTrans;
-
-	}
-
-	public static void addTransaction(ArrayList<Transaction> transactionList, Transaction addTrans) {
-
-		transactionList.add(addTrans);
-		System.out.println("Transaction added");
-	}
-
-	// ================================= Option 3 Archive
-	// =================================
-	public static void archiveTransaction(ArrayList<Transaction> transactionList, ArrayList<Transaction> archiveList) {
-		C206_CaseStudy.viewTransaction(transactionList);
-		int id = Helper.readInt("Enter ID > ");
-		String name = Helper.readString("Enter Name > ");
-
-		for (int i = 0; i < transactionList.size(); i++) {
-			if (id == transactionList.get(i).getTransactionID()) {
-				archiveList.add(new Transaction(id, name));
-				transactionList.remove(i);
-			} else {
-				System.out.println("Transaction does not exist");
-			}
-		} // end of For Loop
-	}
-
-	// ================================= Option 4 Update
-	// =================================
-	public static void updateTransaction(ArrayList<Transaction> transactionList) {
-		boolean isCorrect = false;
-
-		while (isCorrect == true) {
-
-			int id = Helper.readInt("Enter ID > ");
-			String name = Helper.readString("Enter Name > ");
-
-			for (int i = 0; i < transactionList.size(); i++) {
-				if (id == transactionList.get(i).getTransactionID()
-						&& name == transactionList.get(i).getTransactionName()) {
-					isCorrect = true;
-
-					boolean isTrue = false;
-
-					while (isTrue == false) {
-						String new1 = Helper.readString("Enter a new name > ");
-						if (new1 == transactionList.get(i).getTransactionName()) {
-							System.out.println("There is no change in your name.");
-							isTrue = false;
-						} else {
-							System.out.println("Your name has been updated: " + new1);
-							transactionList.get(i).setTransactionName(new1);
-							isTrue = true;
-						}
-					} // end of While Loop
-				} else {
-					System.out.println("id or name is incorrect, please try again.");
-				}
-			} // end of For Loop
-		} // end of While Loop
-	}
-
-	// ================================= Option 5 Link to Product
-	// =================================
-	public static void viewProductTransaction(ArrayList<Transaction> transactionList) {
-
-	}
-
-} // end of C206_CaseStudy
+			} //end of C206_CaseStudy

@@ -2,13 +2,15 @@
 public class Product {
 
 		  private String productName;
+		  private String description;
 		  private String category;
 		  private double price;
 		  private String vendor;
 		  private int points;
 		  
-		  public Product(String productName ,String category, double price, String vendor) {
+		  public Product(String productName , String description,String category, double price, String vendor) {
 		    this.productName = productName;
+		    this.description = description;
 		    this.category = category; 
 		    this.price = price ;
 		    this.vendor = vendor;
@@ -53,6 +55,16 @@ public class Product {
 
 		public void setPoints(int points) {
 			this.points = points;
+		}
+
+
+		public String getDescription() {
+			return description;
+		}
+
+
+		public void setDescription(String description) {
+			this.description = description;
 		}
 		 
 		  }
