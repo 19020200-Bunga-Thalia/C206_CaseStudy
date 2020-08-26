@@ -35,8 +35,8 @@ public class C206_CaseStudyTest {
 
 	@Before
 	public void setUp1() throws Exception {
-		worker1 = new Staff(45, "Jerry", "15062002");
-		worker2 = new Staff(46, "Mary", "15062001");
+		worker1 = new Staff(45, "Jerry", "15062002", 2);
+		worker2 = new Staff(46, "Mary", "15062001", 2);
 
 		staffList = new ArrayList<Staff>();
 
@@ -122,8 +122,8 @@ public class C206_CaseStudyTest {
 	@Before
 	public void setUp2() throws Exception {
 		// insert test data
-		p1 = new Product("Banana", "fruits", 4, "f");
-		p2 = new Product("Apple", "fruits", 2, "c");
+		p1 = new Product("Banana", "fruits","return", 4,  "f");
+		p2 = new Product("Apple", "fruits","exchange", 2 , "c");
 		
 
 	}
@@ -170,11 +170,18 @@ public class C206_CaseStudyTest {
 		// DELETE ERROR
 		assertNotNull("Test if a product has been deleted despite product list being null", productList);
 	}
-		
-		// search for vendor normal 
-		
-		// search for vendor error
-		// search for vendor boundary 
+	public void search_vendortest() {
+	    // search for vendor normal 
+	    productList.add(p1);
+	    assertEquals("Test that vendor searched is successfully displayed ", productList.get(0).getVendor(), "f" );
+	  
+	    // search for vendor error
+	    assertNotNull("Test if there is valid vendor to display", productList);
+	    
+	    // search for vendor boundary: Test if user input is null
+	    String user_input = "";
+	    assertTrue(user_input.isEmpty());
+	  }
 		
 		public void TopVendorsreturnTest() {
 		    // boundary
@@ -201,83 +208,115 @@ public class C206_CaseStudyTest {
 	}
 
 	// ============BUNGA=========
-
 	@Before
-	public void setUp3() throws Exception {
-		c1 = new Customer(22, "Brenda", 12345678, 3);
-		c2 = new Customer(33, "Max", 88237651, 2);
-		c3 = new Customer (44, "May", 123456789, 1);
-		customerList = new ArrayList<Customer>();
+	  public void setUp3() throws Exception {
+	    c1 = new Customer(22, "Brenda", 12345678, 3);
+	    c2 = new Customer(33, "Max", 88237651, 2);
+	    c3 = new Customer(44, "May", 123456789, 1);
+	    customerList = new ArrayList<Customer>();
 
-	}
-	
-	@After
-	public void tearDown3() throws Exception {
-		customerList.clear();
-	}
+	  }
 
-	@Test
-	public void add_customertest() {
-		//NORMAL: New customer data added will increase the array list size
-		customerList.add(c1);
-		assertEquals("Test if customer arraylist size is 1?", 1, customerList.size());
-		
-		
-		//BOUNDARY: When adding customer's contact number, it should only contain 8 integers
-		customerList.add(c3);
-		String contact = Integer.toString(customerList.get(1).getCust_phone());
-		assertEquals("Test if contact number field contain 8 integers?", 8, contact.length());
-		
-		//ERROR: Entering a non-integer into the contact number field will display an error message
+	  @After
+	  public void tearDown3() throws Exception {
+	    customerList.clear();
+	  }
+
+	  @Test
+	  public void add_customertest() {
+	    // NORMAL: New customer data added will increase the array list size
 	    customerList.add(c1);
-	    assertEqual();
-	}
+	    assertEquals("Test if customer arraylist size is 1?", 1, customerList.size());
 
-	@Test
-	public void view_customertest() {
-		// NORMAL: Return 2 customers when given product arrayList size = 2
-		customerList.add(c1);
-		customerList.add(c2);
-		assertEquals("Test if customer arraylist size is 2?", 2, customerList.size());
-		
-		// BOUNDARY: Customer list cannot be null before it is displayed
-		assertNotNull("Test that there is data in Customer arraylist to retrieve", customerList);
-		
-		// ERROR: Only a portion of customer data is displayed
-		customerList.add(c1);
-		customerList.add(c2);
-		assertEquals("Test if two customer data is displayed", 0, customerList.size());
-		
+	    // BOUNDARY: When adding customer's contact number, it should only contain 8
+	    // integers
+	    customerList.add(c3);
+	    String contact = Integer.toString(customerList.get(1).getCust_phone());
+	    assertEquals("Test if contact number field contain 8 integers?", 8, contact.length());
 
-	}
+	    // ERROR: Entering a non-integer into the contact number field will display an
+	    // error message
+	    customerList.add(c1);
+	    int customer_contact = customerList.get(0).getCust_phone();
+	    String i = Integer.toString(customer_contact);
+	    assertEquals("Test if contact number field contain integer", customer_contact, i);
+	  }
 
-	@Test
-	public void delete_customertest() {
-		//NORMAL: Customer information is successfully deleted
-		customerList.add(c1);
-		customerList.add(c2);
-		assertEquals("Test if customer array list is 2?", 2, customerList.size());
-		customerList.clear();
-		assertEquals("Test if customer array list is 0?", 0, customerList.size());
-		
-		//BOUNDARY: Customer list cannot be null before a customer information is deleted
-		assertNotNull("Test if customer array list is not null", customerList);
-		
-		//ERROR: Deleted customer should not be in the array list
-		customerList.add(c1);
-		customerList.add(c2);
-		customerList.remove(c1);
-		customerList.remove(c2);
-		assertEquals("Test if customer data is no longer in the array list",1, customerList);
-		
+	  @Test
+	  public void view_customertest() {
+	    // NORMAL: Return 2 customers when given product arrayList size = 2
+	    customerList.add(c1);
+	    customerList.add(c2);
+	    assertEquals("Test if customer arraylist size is 2?", 2, customerList.size());
+	    
+	    // BOUNDARY: Customer list cannot be null before it is displayed
+	    assertNotNull("Test that there is data in Customer arraylist to retrieve", customerList);
+	    
+	    // ERROR: Only a portion of customer data is displayed
+	    customerList.add(c1);
+	    customerList.add(c2);
+	    assertEquals("Test if two customer data is displayed", 0, customerList.size());
+	  }
+	  
+	  @Test
+	  public void viewby_returnhist() {
+	    //NORMAL: Customers information are successfully displayed based on their transaction history
+	    customerList.add(c1);
+	    customerList.add(c2);
+	    assertEquals("Test that customer info is displayed correctly", customerList, customerList);
+	    
+	   
+	    
+	    // BOUNDARY:Customer list cannot be null before it is displayed
+	    assertNotNull("Test that there is data in Customer arraylist to retrieve", customerList);
+	    
+	    // ERROR:If customer list is empty, an error message will be displayed
+	    assertEquals("Test that customerList is not null ", 1, customerList);
+	  }
 
-	}
+	  
+
+	  @Test
+	  public void delete_customertest() {
+	    // NORMAL: Customer information is successfully deleted
+	    customerList.add(c1);
+	    customerList.add(c2);
+	    assertEquals("Test if customer array list is 2?", 2, customerList.size());
+	    customerList.clear();
+	    assertEquals("Test if customer array list is 0?", 0, customerList.size());
+
+	    // BOUNDARY: Customer list cannot be null before a customer information is
+	    // deleted
+	    assertNotNull("Test if customer array list is not null", customerList);
+
+	    // ERROR: Deleted customer should not be in the array list
+	    customerList.add(c1);
+	    customerList.add(c2);
+	    customerList.remove(c1);
+	    customerList.remove(c2);
+	    assertEquals("Test if customer data is no longer in the array list", 1, customerList);
+
+	  }
+
+	  @Test
+	  public void updateCust_historytest() {
+	    // NORMAL: Customer return transactions information is successfully updated
+	    customerList.add(c2);
+	    customerList.get(0).setCust_returns(2);
+	    assertEquals("Test if customer returns is updated to 2", 2, 2);
+
+	    // BOUNDARY: User input for customer ID must be an integer
+
+	    // ERROR: Staff enters a customer id that is not in the customer list will
+	    // display an error message
+	  }
+	
 
 	// ============GRACE=========
 	@Before
 	public void setUp4() throws Exception {
-		o1 = new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet");
-		o2 = new Outlet(900, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet");
+		o1 = new Outlet(898, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet"," Susan" , "Tampines Outlet");
+		o2 = new Outlet(900, "Singapore Outlet", "Karen", "West Coast Outlet", "Jurong Outlet", "Susan" , "Tampines Outlet");
 	}
 
 	@After
