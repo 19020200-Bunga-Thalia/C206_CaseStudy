@@ -2,6 +2,8 @@ import java.util.ArrayList;
 //
 //
 
+
+
 public class C206_CaseStudy {
 
 	private static final int Add_Product = 1;
@@ -363,11 +365,19 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 		String output = String.format("%-25s %-25s %-25s %-25s \n", "CUSTOMER ID", "CUSTOMER NAME", "CONTACT NUMBER",
 				"NO. OF RETURNS");
-		output += retrieveAllCustomer(customerList);
-		System.out.println(output);
+		System.out.println("View By: ");
+		System.out.println("1. Customer ID");
+		System.out.println("2. Return History ");
+		int view_by = Helper.readInt("Enter option: ");
+		if (view_by == 1) {
+			output += retrieveAllCustomer(customerList);
+			System.out.println(output);
+		}
+		System.out.println();
+
 	}
 
-	// ======================= ADD NEW CUSTOMER=========================
+	// ======================= ADD CUSTOMER=========================
 	public static void addCustomer(ArrayList<Customer> customerList) {
 		int customer_id = 0;
 		for (int i = 0; i < customerList.size(); i++) {
@@ -402,7 +412,7 @@ public class C206_CaseStudy {
 			int customer_id = Helper.readInt("Enter Customer ID that you want to remove :");
 			for (int i = 0; i < customerList.size(); i++) {
 				if (customer_id == customerList.get(i).getCust_id()) {
-					String yesNno = Helper.readString("Are you sure you want to delete this ? (Yes/No):");
+					String yesNno = Helper.readString("Are you sure you want to delete this ? (Y/N):");
 					if (yesNno.equalsIgnoreCase("Yes")) {
 						customerList.remove(i);
 					}
@@ -418,11 +428,15 @@ public class C206_CaseStudy {
 		for (int i = 0; i < customerList.size(); i++) {
 			if (customer_id == customerList.get(i).getCust_id()) {
 				int updated_returns = Helper.readInt("Enter updated number of returns: ");
-				customerList.get(i).getCust_returns();
-
+				String confirm = Helper.readString("Confirm changes made? (Y/N): ");
+				if (confirm.equalsIgnoreCase("Yes")) {
+					customerList.get(i).setCust_returns(updated_returns);
+					System.out.println("Customer return history updated");
+				}
 			}
 		}
-	}
+			
+		}
 
 	// =====================OUTLETS(GRACE)===========================
 
