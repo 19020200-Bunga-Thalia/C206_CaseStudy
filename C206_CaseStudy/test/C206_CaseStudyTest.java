@@ -215,13 +215,12 @@ public class C206_CaseStudyTest {
 		assertEquals("Test if customer arraylist size is 1?", 1, customerList.size());
 		
 		
-		//BOUNDARY: When adding customer's contact number, it should contain 8 integers
+		//BOUNDARY: When adding customer's contact number, it should only contain 8 integers
 		customerList.add(c3);
 		String contact = Integer.toString(customerList.get(1).getCust_phone());
 		assertEquals("Test if contact number field contain 8 integers?", 8, contact.length());
 		
-		//ERROR: Entering a duplicate customer data such as user id will display error message
-	    customerList.add(c1);
+		//ERROR: Entering a non-integer into the contact number field will display an error message
 	    customerList.add(c1);
 	    assertNotSame("Test if a duplicated transaction is added?", customerList.get(0), customerList.get(1));
 	}
