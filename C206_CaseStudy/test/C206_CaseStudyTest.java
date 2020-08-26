@@ -222,7 +222,7 @@ public class C206_CaseStudyTest {
 		
 		//ERROR: Entering a non-integer into the contact number field will display an error message
 	    customerList.add(c1);
-	    assertNotSame("Test if a duplicated transaction is added?", customerList.get(0), customerList.get(1));
+	    assertEqual();
 	}
 
 	@Test

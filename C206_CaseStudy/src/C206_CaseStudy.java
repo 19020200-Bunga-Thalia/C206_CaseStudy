@@ -367,7 +367,7 @@ public class C206_CaseStudy {
 		System.out.println(output);
 	}
 
-	// ======================= ADD CUSTOMER=========================
+	// ======================= ADD NEW CUSTOMER=========================
 	public static void addCustomer(ArrayList<Customer> customerList) {
 		int customer_id = 0;
 		for (int i = 0; i < customerList.size(); i++) {
