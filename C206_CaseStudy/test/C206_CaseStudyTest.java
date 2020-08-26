@@ -88,6 +88,21 @@ public class C206_CaseStudyTest {
 		assertNotNull("Position is empty hence nothing to remove", staffList);
 
 	}
+	public void update_stafftest() {
+		//Staff list is not null to be updated - Normal
+		assertNotNull("Staff list is not null to be updated",staffList);
+	
+		//Staff name has to be in staff list to be updated - Boundary
+		staffList.add(worker1);
+		assertSame("Test if there is the same worker in the list", staffList.get(0), staffList);
+		//Staff information unable to update due to name not in staff list ( Error )
+		for (int i = 0; i < staffList.size(); i++) {
+		assertSame("Test if the worker name is in the list",staffList.get(i).getStaff_name(),
+				staffList);
+		
+	}
+	}
+	
 
 	private String retrieveAllStaff(ArrayList<Staff> staffList2) {
 		// TODO Auto-generated method stub

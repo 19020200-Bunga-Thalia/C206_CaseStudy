@@ -52,6 +52,7 @@ public class C206_CaseStudy {
 				System.out.println("1. Add");
 				System.out.println("2. Delete");
 				System.out.println("3. View All");
+				System.out.println("4. Update");
 				int suboption = Helper.readInt("Enter option :");
 				if (suboption == 1) {
 					C206_CaseStudy.addStaff(staffList);
@@ -59,7 +60,11 @@ public class C206_CaseStudy {
 					C206_CaseStudy.deleteStaff(staffList);
 				} else if (suboption == 3) {
 					C206_CaseStudy.viewAllStaff(staffList);
-				} else {
+				} else if (suboption == 4) {
+					C206_CaseStudy.updateStaff(staffList);
+				}
+				
+				else {
 					System.out.println("Invalid option");
 				}
 			} else if (option == 2) {
@@ -120,10 +125,9 @@ public class C206_CaseStudy {
 				}
 
 			} else if (option == 5) {
-				System.out.println("1. View");
-				System.out.println("2. Add");
-				System.out.println("3. Archive");
-				System.out.println("4. Update");
+				System.out.println("1. Add");
+				System.out.println("2. Archive");
+				System.out.println("3. View All");
 				option = Helper.readInt("Enter an option > ");
 				if (option == OPTION_VIEWALLTRANSACTION) {
 					// View all transactions
@@ -142,14 +146,11 @@ public class C206_CaseStudy {
 					C206_CaseStudy.archiveTransaction(transactionList, archiveList);
 
 				}
-				else if (option == OPTION_UPDATETRANSACTION) {
-					C206_CaseStudy.updateTransaction(transactionList, productList);
 
-			} else if (option == 5) {
+			} else if (option == 6) {
 				System.out.println("Program Exit");
 			} else {
 				System.out.println("Invalid Option");
-			}
 			}
 		}
 
@@ -161,8 +162,8 @@ public class C206_CaseStudy {
 	public static String retrieveAllStaff(ArrayList<Staff> staffList) {
 		String output = "";
 		for (int i = 0; i < staffList.size(); i++) {
-			output += String.format("%-25d %-25s %-25s \n", staffList.get(i).getStaff_id(),
-					staffList.get(i).getStaff_name(), staffList.get(i).getStaff_birthdate());
+			output += String.format("%-25d %-25s %-25s %-25s \n", staffList.get(i).getStaff_id(),
+					staffList.get(i).getStaff_name(), staffList.get(i).getStaff_birthdate(), staffList.get(i).getStaff_outletID());
 		}
 		return output;
 	}
@@ -171,7 +172,7 @@ public class C206_CaseStudy {
 		Helper.line(80, "-");
 		System.out.println("STAFF LIST");
 		Helper.line(80, "-");
-		String output = String.format("%-25s %-25s %-25s \n", "STAFF ID", "STAFF NAME", "BIRTHDATE");
+		String output = String.format("%-25s %-25s %-25s %-25s \n", "STAFF ID", "STAFF NAME", "BIRTHDATE", "OUTLET ID");
 		output += retrieveAllStaff(staffList);
 		System.out.println(output);
 	}
@@ -182,8 +183,8 @@ public class C206_CaseStudy {
 		int staff_id = Helper.readInt("Enter Staff ID : ");
 		String staff_name = Helper.readString("Enter Staff name : ");
 		String staff_birthdate = Helper.readString("Enter birthdate (DDMMYYYY) : ");
-		int staff_outletID = Helper.readInt("Enter staff outlet ID : ");
-		Staff st = new Staff(staff_id, staff_name, staff_birthdate, staff_outletID);
+		int staff_outletID = Helper.readInt("Enter staff outlet ID: ");
+		Staff st = new Staff(staff_id, staff_name, staff_birthdate,staff_outletID);
 		staffList.add(st);
 		System.out.println("Staff added");
 	}
@@ -216,6 +217,25 @@ public class C206_CaseStudy {
 			}
 		}
 	}
+	//================Update staff=======================  
+	public static void updateStaff(ArrayList<Staff> staffList) {
+		int updatestaff1 = Helper.readInt("Enter ID of Staff to update: ");
+		for (int i = 0; i < staffList.size(); i++) {
+			if (updatestaff1 == staffList.get(i).getStaff_id()) {
+				int update_staffid = Helper.readInt("Enter new staff ID: ");
+				String update_staffname = Helper.readString("Enter new name: ");
+				String update_staffbirthdate = Helper.readString("Enter new birthdate: ");
+				int update_staffoutlet = Helper.readInt("Enter new outlet ID: ");
+				staffList.get(i).setStaff_id(update_staffid);
+				staffList.get(i).setStaff_name(update_staffname);
+				staffList.get(i).setStaff_birthdate(update_staffbirthdate);
+				staffList.get(i).setStaff_outletID(update_staffoutlet);
+				
+
+	}
+		}
+	}
+	
 	// =====================PRODUCT (KARLA)===========================
 
 	// ====================== view product =========================
