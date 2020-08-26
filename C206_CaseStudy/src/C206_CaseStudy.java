@@ -309,7 +309,7 @@ public class C206_CaseStudy {
 
 	// =====================CUSTOMER(BUNGA)===========================
 
-	// ================VIEW CUSTOMER=======================
+	// ================VIEW CUSTOMER / BY HISTORY=======================
 
 	public static String retrieveAllCustomer(ArrayList<Customer> customerList) {
 		String output = "";
