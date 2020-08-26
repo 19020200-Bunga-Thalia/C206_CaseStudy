@@ -438,7 +438,7 @@ public class C206_CaseStudy {
 			if (customer_id == customerList.get(i).getCust_id()) {
 				int updated_returns = Helper.readInt("Enter updated number of returns: ");
 				String confirm = Helper.readString("Confirm changes made? (Y/N): ");
-				if (confirm.equalsIgnoreCase("Yes")) {
+				if (confirm.equalsIgnoreCase("Y")) {
 					customerList.get(i).setCust_returns(updated_returns);
 					System.out.println("Customer return history updated");
 				}
