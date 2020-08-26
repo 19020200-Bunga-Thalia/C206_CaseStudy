@@ -1,6 +1,6 @@
 import java.util.ArrayList;
   public class OutletDB {
-    //sub class
+    //subclass
     //GRACE
 
     public static ArrayList<Outlet> outletList = new ArrayList<>();
@@ -17,7 +17,7 @@ import java.util.ArrayList;
       for(int i =0; i < outletList.size();i++) {
         output +="Outlet Name: " + outletList.get(i).getOutlet_name() + "\n";
         output +="Outlet ID: " + outletList.get(i).getOutlet_id() +"\n";
-        output +="Staff Outlet: " + outletList.get(i).getStaff_outlet() +"\n";
+        output +="Staff Name: " + outletList.get(i).getStaff() +"\n";
         check = 1;
       }
       if(check == 0) {
@@ -42,8 +42,14 @@ import java.util.ArrayList;
       System.out.println("1.Add outlet");
       System.out.println("2.View outlet");
       System.out.println("3.Delete outlet");
-      System.out.println("4.Quit");
+      System.out.println("4.Update staff per outlet");
+      System.out.println("5.Search an outlet");
+      System.out.println("6.Quit");
     
+  }
+  public static String updatestaffper_outlet(String string) {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 
