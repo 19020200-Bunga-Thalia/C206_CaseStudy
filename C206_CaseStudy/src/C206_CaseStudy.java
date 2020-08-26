@@ -3,8 +3,6 @@ import java.util.Collections;
 //
 //
 
-
-
 public class C206_CaseStudy {
 
 	private static final int OPTION_UPDATEPRODUCTTRANSACTION = 4;
@@ -263,7 +261,7 @@ public class C206_CaseStudy {
 //======================= ADD PRODUCT========================= 
 	public static Product inputProduct() {
 		String productName = Helper.readString("Enter a product to add > ");
-		String description = Helper.readString("Enter description of product");
+		String description = Helper.readString("Enter description of product> ");
 		String category = Helper.readString("Enter category of product > ");
 		double price = Helper.readDouble("Enter price of product > ");
 		String vendor = Helper.readString("Enter vendor of product > ");
@@ -383,9 +381,9 @@ public class C206_CaseStudy {
 			output += output1;
 			System.out.println(output);
 		}
-				
-		}
-			
+
+	}
+
 	// ======================= ADD CUSTOMER=========================
 	public static void addCustomer(ArrayList<Customer> customerList) {
 		int customer_id = 0;
@@ -402,13 +400,13 @@ public class C206_CaseStudy {
 			System.out.println("Please enter a valid phone number");
 			customer_contact = Helper.readInt("Enter customer contact number: ");
 			phone = Integer.toString(customer_contact);
-			if (phone.length() == 8) {
-				int customer_returns = Helper.readInt("Enter number of returns made: ");
-				Customer ct = new Customer(customer_id, customer_name, customer_contact, customer_returns);
-				customerList.add(ct);
-				System.out.println("Customer added");
-			}
+			
 		}
+			int customer_returns = Helper.readInt("Enter number of returns made: ");
+			Customer ct = new Customer(customer_id, customer_name, customer_contact, customer_returns);
+			customerList.add(ct);
+			System.out.println("Customer added");
+		
 
 	}
 
